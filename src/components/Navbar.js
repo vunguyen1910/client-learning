@@ -30,7 +30,7 @@ export default function NavBar(props) {
         >
           <span>Learning Music</span>
         </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav style={{ paddingLeft: "70%" }}>
             <LinkTo className="Courses_gp_Class nav-link" style={{ color: "white" }} to="/#course">

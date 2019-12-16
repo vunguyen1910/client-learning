@@ -120,6 +120,7 @@ export default function VideoLearning(props) {
               onClick={() => {
                 delete_doc(doc.id);
               }}
+              className="mr-5"
             >
               Delete
             </Button>
