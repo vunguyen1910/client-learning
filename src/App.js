@@ -16,7 +16,7 @@ import EditReCourse from "./pages/EditReCourse";
 import VideoLearning from "./pages/VideoLearning";
 import ClipLoader from "react-spinners";
 
-function App() {
+function App(props) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [course, setCourse] = useState([]);
@@ -81,24 +81,24 @@ function App() {
         <Route
           path="/course/:id/edit"
           render={() => (
-            <EditCourse currentUser={currentUser} course={course} />
+            <EditCourse currentUser={currentUser} course={course} {...props}/>
           )}
         />
         <Route
           path="/course/:subject"
           render={() => (
-            <CourseSubject currentUser={currentUser} setCourse={setCourse} />
+            <CourseSubject currentUser={currentUser} setCourse={setCourse} {...props} />
           )}
         />
         <Route
           path="/recourse/:id/edit"
-          render={() => <EditReCourse recourse={recourse} />}
+          render={() => <EditReCourse recourse={recourse} {...props}/>}
         />
         <Route
           exact
           path="/video/:id"
           render={() => (
-            <VideoLearning recourse={recourse} currentUser={currentUser} />
+            <VideoLearning recourse={recourse} currentUser={currentUser} {...props}/>
           )}
         />
         <Route
@@ -107,10 +107,11 @@ function App() {
             <LearningCourse
               currentUser={currentUser}
               setrecourse={setrecourse}
+              {...props}
             />
           )}
         />
-        <Route path="/" render={() => <HomePage />} />
+        <Route path="/" render={() => <HomePage {...props}/>} />
       </Switch>
     </div>
   );
