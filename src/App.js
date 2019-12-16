@@ -49,8 +49,6 @@ function App(props) {
     }
 
   };
-
-  if (!loaded) return <img src="https://i.gifer.com/EXfb.gif" style={{width:"100vw", height:"100vh"}}/>
   return (
     <div className="App Desktop_Version">
       <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
