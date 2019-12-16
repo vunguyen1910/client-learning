@@ -45,6 +45,7 @@ export default function NavBar(props) {
                 >
                   <span>Log out</span>
                 </Nav.Link>
+                <Link className="Log_In_Class nav-link" style={{ color: "white" }} to="/create-course">Create course</Link>
               </>
             ) : (
               <>
