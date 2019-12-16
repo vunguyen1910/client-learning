@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
+import {HashLink as LinkTo} from 'react-router-hash-link'
 export default function NavBar(props) {
   const history = useHistory();
 
@@ -32,9 +33,9 @@ export default function NavBar(props) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav style={{ paddingLeft: "70%" }}>
-            <Nav.Link className="Courses_gp_Class" style={{ color: "white" }} href="#course">
+            <LinkTo className="Courses_gp_Class nav-link" style={{ color: "white" }} to="/#course">
               <span>Courses</span>
-            </Nav.Link>
+            </LinkTo>
             {props.currentUser ? (
               <>
                 <Nav.Link

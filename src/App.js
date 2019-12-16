@@ -18,7 +18,7 @@ import ClipLoader from "react-spinners";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [loaded, setLoaded] = useState(true);
+  const [loaded, setLoaded] = useState(false);
   const [course, setCourse] = useState([]);
   const [recourse, setrecourse] = useState([]);
 
@@ -45,9 +45,12 @@ function App() {
     } else {
       localStorage.clear("token");
       setCurrentUser(null);
+      setLoaded(true);
     }
-    setLoaded(false);
+
   };
+
+  if (!loaded) return <img src="https://i.gifer.com/EXfb.gif" style={{width:"100vw", height:"100vh"}}/>
   return (
     <div className="App Desktop_Version">
       <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
