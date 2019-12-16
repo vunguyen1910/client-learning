@@ -9,14 +9,7 @@ export default function Forgot() {
   const [input, setInput] = useState("");
 
     const [token, setToken] = useState(accessToken)
-  const history = useHistory()
-  
-  if (accessToken == null) history.push('/')
-  
-  
-  useEffect(() => {
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }, [])
+    const history = useHistory()
 
   const getNewPass = async() => {
     if(input){
@@ -35,7 +28,7 @@ export default function Forgot() {
     }
     }  
   }
-
+console.log(token)
   const handelChange = e => {
     e.preventDefault();
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -44,6 +37,8 @@ export default function Forgot() {
     e.preventDefault();
     getNewPass()
   };
+
+  if (token == null) history.push('/')
   return (
     <Form
       className="container"
