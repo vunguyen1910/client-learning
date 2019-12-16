@@ -75,7 +75,6 @@ export default function VideoLearning(props) {
       const a = data.data.url.split("=")[1];
       setCutVideo(a);
       setReCourse(data.data);
-      console.log(data.data, "fetch data");
     } else alert("cant fetch");
   };
 

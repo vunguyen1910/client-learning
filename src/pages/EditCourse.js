@@ -8,7 +8,6 @@ export default function EditCourse(props) {
     if (course.id == id) return true;
   })[0];
 
-  console.log(getCourseByID, "Course id");
 
   const [name, setName] = useState(getCourseByID && getCourseByID.name);
   const [img, setImg] = useState(getCourseByID && getCourseByID.img);
@@ -45,7 +44,6 @@ export default function EditCourse(props) {
           const data = await resp.json()
       }
   };
-  console.log(name, img, desc)
   return (
     <div className="container">
       <Form noValidate validated={validated} onSubmit={handleSubmit}>

@@ -18,7 +18,6 @@ export default function Forgot() {
         
         if(resp.ok){
             const data = await resp.json()
-            console.log(data)
             if(data.success === true) setState(data.right)
             if(data.success === false) setState(data.wrong)
         }

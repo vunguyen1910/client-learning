@@ -9,7 +9,6 @@ export default function Forgot() {
   const [input, setInput] = useState("");
 
     const [token, setToken] = useState(accessToken)
-    console.log(token,"aaaaaa")
   const history = useHistory()
   
   if (accessToken == null) history.push('/')

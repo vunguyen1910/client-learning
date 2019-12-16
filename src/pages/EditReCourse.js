@@ -1,17 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 export default function EditReCourse(props) {
   const { id } = useParams();
 
-  const recourse = props.recourse;
-  const getRecourseByID = recourse.filter(recourseID => {
-    if (recourseID.id == id) return true;
-  })[0];
 
-  const [title, setTitle] = useState(getRecourseByID && getRecourseByID.title);
-  const [url, setURL] = useState(getRecourseByID && getRecourseByID.url);
-  const [desc, setdesc] = useState(getRecourseByID && getRecourseByID.desc);
+  const [title, setTitle] = useState('');
+  const [url, setURL] = useState('');
+  const [desc, setdesc] = useState('');
   const [validated, setValidated] = useState(false);
   const [state, setState] = useState("");
 
@@ -25,29 +21,54 @@ export default function EditReCourse(props) {
       setValidated(true);
     }
   };
-const history = useHistory()
-  const editrecourse = async () => {
-    const resp = await fetch(`${process.env.REACT_APP_URL_DATABASE}/recourse/${id}/edit`, {
-      method: "PUT",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        "title": title,
-        "url": url,
-        "desc": desc
-      })
-    });
+  const history = useHistory();
+
+  useEffect(() => {
+    getSingelRecoure();
+  }, []);
+
+  const getSingelRecoure = async () => {
+    const resp = await fetch(
+      `${process.env.REACT_APP_URL_DATABASE}/recourse/singel-recourse/${id}`,
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
     if (resp.ok) {
       const data = await resp.json();
-      if (data.success) {setState("You has edit it")}
-      else setState("something went wrong");
-      history.goBack()
+      setTitle(data.data.title);
+      setdesc(data.data.desc);
+      setURL(data.data.url);
+    }
+  };
+  const editrecourse = async () => {
+    const resp = await fetch(
+      `${process.env.REACT_APP_URL_DATABASE}/recourse/${id}/edit`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          "title": title,
+          "url": url,
+          "desc": desc
+        })
+      }
+    );
+    if (resp.ok) {
+      const data = await resp.json();
+      if (data.success) {
+        setState("You has edit it");
+      } else setState("something went wrong");
+      history.goBack();
     }
   };
   return (
-    <div>
+    <div className="ml-5 mr-5">
       <p style={{ color: "red" }}>{state}</p>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group controlId="validationCustom01">

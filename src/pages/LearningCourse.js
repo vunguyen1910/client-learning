@@ -33,7 +33,6 @@ export default function LearningCourse(props) {
     });
     if (resp.ok) {
       const data = await resp.json();
-      console.log(data.data);   
       setReCourse(data.data);
       props.setrecourse(reCourse);
     } else alert("cant fetch");

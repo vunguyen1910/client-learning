@@ -13,11 +13,8 @@ export default function CourseSubject(props) {
     });
     if (resp.ok) {
       const data = await resp.json();
-      console.log(data.data);
       setCourse(data.data);
       props.setCourse(data.data)
-
-      console.log(data.data, 'course from coursesubject')
     } else alert("cant fetch");
   };
 
@@ -39,9 +36,6 @@ export default function CourseSubject(props) {
     getSourceSubject();
   }, []);
   const courseRender = courseinSubject.map(course => {
-    console.log('Loi', props.currentUser)
-    console.log('Course ID',course.teacher_id)
-    console.log('Is it true?', props.currentUser === course.teacher_id)
     return (
       <Card className="mt-2">
         <Card.Img variant="top" src={course.img} />
