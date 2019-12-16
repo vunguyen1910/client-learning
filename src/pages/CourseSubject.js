@@ -48,11 +48,11 @@ export default function CourseSubject(props) {
         <Card.Body>
           <Card.Title>{course.name}</Card.Title>
           <Card.Text>{course.desc}</Card.Text>
-          <Link to={`/recouse/${course.id}`}>Watch ReCourse</Link>
+          <Link to={`/recouse/${course.id}`} className="btn btn-primary">Watch ReCourse</Link>
             {(props.currentUser && props.currentUser.id) === course.teacher_id ?
                     <>
-                    <Button onClick={()=> deleteCourse(course.id)}>Delete</Button>
-                    <Link to={`/course/${course.id}/edit`} className="btn btn-primary">Edit</Link> 
+                    <Button onClick={()=> deleteCourse(course.id)} className="m-3">Delete</Button>
+                    <Link to={`/course/${course.id}/edit`} className="btn btn-primary m-3">Edit</Link> 
                     </>: ''  
             }
         </Card.Body>

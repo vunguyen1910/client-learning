@@ -45,11 +45,11 @@ export default function LearningCourse(props) {
         <Card.Body>
           <Card.Title>{recourse.title}</Card.Title>
           <Card.Text>{recourse.desc}</Card.Text>
-          <Link to={`/video/${recourse.id}`}>View</Link>
+          <Link to={`/video/${recourse.id}`} className="btn btn-primary">View</Link>
           {props.currentUser ? (
             props.currentUser.id === recourse.teacher_id ? (
               <>
-                <Button onClick={()=>{deleterReCourse(recourse.id)}}>Delete</Button>
+                <Button onClick={()=>{deleterReCourse(recourse.id)}} className="m-3">Delete</Button>
                 <Link className="btn btn-primary" to={`/recourse/${recourse.id}/edit`}>Edit</Link>
               </>
             ) : (

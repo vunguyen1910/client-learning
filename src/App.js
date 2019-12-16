@@ -74,6 +74,7 @@ function App(props) {
           path="/create-course"
           user={currentUser}
           component={CreateCourse}
+          {...props}
         />
         } />
         <Route
