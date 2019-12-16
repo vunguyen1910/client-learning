@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Col, Row, Button, Modal, Form, Tabs, Tab } from "react-bootstrap";
 import Markdown from "react-markdown";
-import { get } from "http";
+import Helmet from 'react-helmet'
 
 export default function VideoLearning(props) {
   const [recourse, setReCourse] = useState({});
@@ -200,6 +200,9 @@ export default function VideoLearning(props) {
 
   return (
     <div>
+        <Helmet>
+        <title>Watch video and read documentation</title>
+        </Helmet>
       <Row
         className="video"
         style={{

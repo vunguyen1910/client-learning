@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button, Card, Form, Col } from "react-bootstrap";
+import Helmet from 'react-helmet'
 export default function LearningCourse(props) {
   const [reCourse, setReCourse] = useState([]);
   const [url, seturl] = useState('');
@@ -99,6 +100,9 @@ export default function LearningCourse(props) {
 
   return (
     <div className="container">
+        <Helmet>
+        <title>{title}</title>
+        </Helmet>
       {(props.currentUser && props.currentUser.teacher_id) === reCourse.teacher_id ? (
         <Form noValidate validated={validated} onSubmit={() => handleSubmit()}>
           <Form.Group as={Col} controlId="validationCustom01">

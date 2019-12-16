@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
+import Helmet from 'react-helmet'
 export default function CourseSubject(props) {
   const { subject } = useParams();
   const [courseinSubject, setCourse] = useState([]);
@@ -54,6 +55,9 @@ export default function CourseSubject(props) {
     );
   });
   return <div className="container mt-5">
+        <Helmet>
+        <title>{subject}</title>
+        </Helmet>
       {state}
       {courseRender}
       </div>;
