@@ -94,6 +94,7 @@ export default function LearningCourse(props) {
     if(resp.ok){
         const data = await resp.json()
         setState(data.message)
+        getReCourse()
     }
   };
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 export default function EditReCourse(props) {
   const { id } = useParams();
@@ -25,7 +25,7 @@ export default function EditReCourse(props) {
       setValidated(true);
     }
   };
-
+const history = useHistory()
   const editrecourse = async () => {
     const resp = await fetch(`${process.env.REACT_APP_URL_DATABASE}/recourse/${id}/edit`, {
       method: "PUT",
@@ -43,6 +43,7 @@ export default function EditReCourse(props) {
       const data = await resp.json();
       if (data.success) {setState("You has edit it")}
       else setState("something went wrong");
+      history.goBack()
     }
   };
   return (
