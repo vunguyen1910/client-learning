@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Form, Button} from 'react-bootstrap'
 export default function Forgot() {
     const [input, setInput] = useState("");
-    const [state, setState] = useState('')
+    const [state, setState] = useState(null)
     const handelChange=(e)=>{
         e.preventDefault()
         setInput({ ...input, [e.target.name]: e.target.value })
@@ -18,8 +18,8 @@ export default function Forgot() {
         
         if(resp.ok){
             const data = await resp.json()
-            if(data.success === true) setState(data.right)
-            if(data.success === false) setState(data.wrong)
+            if(data.success === true) setState(true)
+            if(data.success === false) setState(false)
         }
     };
     const handelSubmit = (e) => {
@@ -28,7 +28,7 @@ export default function Forgot() {
     }
     return (
         <Form className="container" onSubmit={e=>handelSubmit(e)} onChange={e=> handelChange(e)}>
-          <p>{state}</p>
+          {true ? <h3 style={{color: "blue"}}>Check your Email</h3>: <h3 style={{color: "red"}}>Email not exist</h3>}
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" name="email" />
