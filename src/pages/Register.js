@@ -39,7 +39,6 @@ export default function Register(props) {
       // co 2 truong hop cua resp 1)resp backend tra ve, 2) error, backend ko tra ve, do HTTP tu tra ve
       const data = await resp.json() // data la` cua backend tra ve
       if (data.success){
-        props.setCurrentUser(data.user)
         history.push('/login')
       }else {
         setState(data.state)
