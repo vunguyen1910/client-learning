@@ -45,8 +45,6 @@ export default function Register(props) {
       }else {
         setState(data.state)
       }
-    } else {
-      alert('fail to fetch')
     }
   }
   if (props.currentUser) history.push('/')
