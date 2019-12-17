@@ -8,8 +8,8 @@ export default function NavBar(props) {
   const logOut = async () => {
     const resp = await fetch(`${process.env.REACT_APP_URL_DATABASE}/logout`, {
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${localStorage.getItem("token")}`
+        Authorization: localStorage.getItem('token'),
+        "Content-Type": "application/json"
       }
     });
     if (resp.ok) {
