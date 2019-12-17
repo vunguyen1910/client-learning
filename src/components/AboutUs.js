@@ -5,7 +5,7 @@ export default function AboutUs() {
   return (
     <Row className="Group_109_Class mt-5">
       <Col className="text-right justify-content-center pb-5">
-        <img src={require("../img/Music-on-brain.jpg")} />
+        <img src={require("../img/Music-on-brain.jpg")} style={{width:"80%"}}/>
       </Col>
       <Col style={{ padding: "8%" }}>
         <div class="Group_3_Class">

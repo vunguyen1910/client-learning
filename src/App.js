@@ -50,7 +50,7 @@ function App(props) {
 
   };
   return (
-    <div className="App Desktop_Version">
+    <div className="App">
       <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
       <Switch>
         <Route
