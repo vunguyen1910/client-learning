@@ -40,7 +40,6 @@ export default function Register(props) {
       const data = await resp.json() // data la` cua backend tra ve
       if (data.success){
         props.setCurrentUser(data.user)
-        localStorage.setItem('token', data.token)
         history.push('/login')
       }else {
         setState(data.state)
