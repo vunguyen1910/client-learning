@@ -61,7 +61,7 @@ export default function NavBar(props) {
                   style={{ color: "white" }}
                   to="/register"
                 >
-                  <span>Become a tutorr</span>
+                  <span>Become a tutor</span>
                 </Link>
               </>
             )}

@@ -58,7 +58,7 @@ export default function Courses() {
               <span>Free</span>
             </Card.Footer>
             <Card.Footer id="Teacher__Ressie_Rottman">
-              <span>Teacher: Ressie Rottman</span>
+              <span>Teacher: Nguyen Vu</span>
             </Card.Footer>
             <Card.Body id="Lorem_ipsum_dolor_sit_amet__co_cm">
               <span>You can learning guitar quick and easy</span>
@@ -94,7 +94,7 @@ export default function Courses() {
               <span>Free</span>
             </Card.Footer>
             <Card.Footer id="Teacher__Ressie_Rottman">
-              <span>Teacher: Ressie Rottman</span>
+              <span>Teacher: Lan Huong</span>
             </Card.Footer>
             <Card.Body id="Lorem_ipsum_dolor_sit_amet__co_cm">
               <span>You can learning guitar quick and easy</span>
