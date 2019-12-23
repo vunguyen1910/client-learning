@@ -46,7 +46,7 @@ export default function Login(props) {
         </div>
         <div className="col-lg-6 pr-5">
           <h1 className="title-signin text-center">Sign in</h1>
-          <form className="container needs-validation" noValidate onChange={(e)=>handelOnChange(e)}>
+          <form className="container needs-validation" novalidate onChange={(e)=>handelOnChange(e)}>
             <div className="form-group">
               <label className="login-label">Email address</label>
               <input
@@ -60,7 +60,7 @@ export default function Login(props) {
               <label className="login-label">Password</label>
               <input
                 type="password"
-                className="form-control rounded-pill input-login text-center" id="validationCustom01"
+                className="form-control rounded-pill input-login text-center" id="validationCustom02"
                 required
                 name="pass"
               />
