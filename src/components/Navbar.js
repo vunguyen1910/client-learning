@@ -22,11 +22,13 @@ export default function NavBar(props) {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark">
+        <Link to="/">
         <img
           className="navbar-brand ml-5"
           href="#"
           src={require("../img/group-2.png")}
         />
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -43,14 +45,14 @@ export default function NavBar(props) {
           <ul className="navbar-nav mr-auto"></ul>
           <ul className="navbar-nav col-auto">
             <li className="nav-item">
-              <LinkTo className="nav-link border-right active px-5">
+              <LinkTo className="nav-link border-right active px-5" to="/#course">
                 Courses
               </LinkTo>
             </li>
             {props.currentUser ? (
               <>
                 <li className="nav-item">
-                  <p className="nav-link active mx-5" onClick={()=>logOut()}>Logout</p>
+                  <div className="nav-link active mx-5" onClick={()=>logOut()}>Logout</div>
                 </li>
               </>
             ) : (

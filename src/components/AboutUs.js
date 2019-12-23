@@ -34,7 +34,7 @@ export default function AboutUs() {
                     <i className="fas fa-chalkboard-teacher fa-2x pb-4"></i>
                   </p>
                   <p>
-                    <i class="far fa-comment-alt fa-2x"></i>
+                    <i className="far fa-comment-alt fa-2x"></i>
                   </p>
                 </div>
                 <div className="col-10 col-md-10">

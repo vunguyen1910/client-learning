@@ -3,6 +3,10 @@
 }
 body{
 	font-family: 'Libre Franklin', sans-serif;
+
+}
+html{
+	scroll-behavior: smooth;
 }
 .caption-masterhead{
 	padding-top: 30%;
@@ -41,4 +45,40 @@ body{
 }
 .btn-course:hover{
 	background-color:#010068 ;
+}
+.title-signin{
+	color: #00006c;
+	font-size: 24px;
+  font-weight: bold;
+  padding-bottom: 3em;
+}
+.login-label{
+	font-size: 18px;
+	font-weight: 600;
+	padding-bottom: 1em;
+}
+.input-login{
+	height: 40px;
+}
+.forgot-password{
+	object-fit: contain;
+	font-size: 18px;
+	font-weight: 600;
+	letter-spacing: -0.18px;
+	color: #c62077;
+}
+.login-button{
+	object-fit: contain;
+	border-radius: 17.5px;
+	background-color: #c42677;
+	font-size: 18px;
+	font-weight: 600;
+	color: white;
+}
+.login-facebook{
+	font-size: 18px;
+	font-weight: 600;
+	border-radius: 17.5px;
+	color: white;
+	background-color: #020066;
 }
