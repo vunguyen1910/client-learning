@@ -5,7 +5,6 @@ import Courses from "../components/Courses";
 import Contact from "../components/Contact"
 import Feature from "../components/Feature"
 import Teacher from "../components/Teacher"
-import Location from "../components/Location"
 import Blog from "../components/Blog"
 import Client from "../components/Client"
 import Sub from "../components/Sub" 

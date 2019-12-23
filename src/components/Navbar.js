@@ -41,7 +41,7 @@ export default function NavBar(props) {
           </ul>
           <ul className="navbar-nav col-auto">
           <li className="nav-item">
-              <LinkTo className="nav-link border-right active px-5">
+              <LinkTo className="nav-link border-right active px-5" >
                 Courses
               </LinkTo>
             </li>

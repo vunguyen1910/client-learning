@@ -2,7 +2,7 @@
 	background-color: #030064;
 }
 body{
-	font-family: 'Coustard', serif;
+	font-family: 'Libre Franklin', sans-serif;
 }
 .caption-masterhead{
 	padding-top: 30%;
@@ -30,4 +30,15 @@ body{
   font-size: 24px;
   font-weight: bold;
   color: #00006c;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.btn-course{
+	background-color: #c42677;
+	color: white;
+	font-size: 18px;
+	border: none;
+}
+.btn-course:hover{
+	background-color:#010068 ;
 }
