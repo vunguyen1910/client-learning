@@ -1,54 +1,52 @@
 import React from "react";
-import { Row, Col, Image } from "react-bootstrap";
 
 export default function AboutUs() {
   return (
-    <Row className="Group_109_Class mt-5">
-      <Col className="text-right justify-content-center pb-5">
-        <img src={require("../img/Music-on-brain.jpg")} style={{width:"80%"}}/>
-      </Col>
-      <Col style={{ padding: "8%" }}>
-        <div class="Group_3_Class">
-          <div class="Science_Class">
-            <span>Science</span>
+    <section className="jumbotron jumbotron-fluid bg-transparent">
+      <div className="container">
+        <div className="row">
+          <div className="col-6">
+            <img
+              src={require("../img/bitmap.png")}
+              alt="artist"
+              className="img-fluid"
+            />
           </div>
-          <div data-type="Text" class="Lorem_ipsum_dolor_sit_amet__co_Class">
-            <span>
-              Music associated with our life. It's hard to imagine a world that
-              lacks the notes: from mother lull you to sleep, instrumental for
-              coffee Saturday afternoon, song honoring her pupil for graduation,
-              to the tune thrill for wedding couple. Even when he is sad,
-              painful, we also seek to melodies soothe the spirit.
-            </span>
+          <div className="col-6">
+            <div className="container">
+              <h2>About Us</h2>
+              <p className="lead mt-5">
+                Music associated with our life. It's hard to imagine a world
+                that lacks the notes: from mother lull you to sleep,
+                instrumental for coffee Saturday afternoon, song honoring her
+                pupil for graduation, to the tune thrill for wedding couple.
+                Even when he is sad, painful, we also seek to melodies soothe
+                the spirit.
+              </p>
+            </div>
+            <div className="container px-5 py-5 aboutus">
+              <div className="row">
+                <div className="col-2 col-md-2 d-none d-md-block">
+                  <p>
+                    <i className="fas fa-book-open fa-2x pb-4"></i>
+                  </p>
+                  <p>
+                    <i className="fas fa-chalkboard-teacher fa-2x pb-4"></i>
+                  </p>
+                  <p>
+                    <i class="far fa-comment-alt fa-2x"></i>
+                  </p>
+                </div>
+                <div className="col-10 col-md-10">
+                  <h5 className="mb-5 text-aboutus">Learn anything</h5>
+                  <h5 className="mb-5 ml-0 text-aboutus">Talk to instructors</h5>
+                  <h5 className="text-aboutus">Speak with others</h5>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="Group_4_Class pt-5">
-          <div
-            data-type="Text"
-            data-name="Learn anything"
-            class="Learn_anything_Class"
-          >
-            <img src={require("../img/icon_1.png")} className="pr-3" />
-            <span>Learn anything</span>
-          </div>
-          <div
-            data-type="Text"
-            data-name="Talk to our instructors"
-            class="Talk_to_our_instructors_Class pt-2"
-          >
-            <img src={require("../img/icon_2.png")} className="pr-3" />
-            <span>Talk to our instructors</span>
-          </div>
-          <div
-            data-type="Text"
-            data-name="Speak with others"
-            class="Speak_with_others_Class pt-2"
-          >
-            <img src={require("../img/icon_3.png")} className="pr-3" />
-            <span>Speak with others</span>
-          </div>
-        </div>
-      </Col>
-    </Row>
+      </div>
+    </section>
   );
 }

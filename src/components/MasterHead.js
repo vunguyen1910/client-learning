@@ -1,44 +1,50 @@
-import React,{useState} from "react";
-import Carousel from 'react-bootstrap/Carousel'
-
+import React, { useState } from "react";
+import Carousel from "react-bootstrap/Carousel";
 
 export default function MasterHead() {
-    const [index, setIndex] = useState(0)
-  
-    const handleSelect = (selectedIndex, e) => {
-      setIndex(selectedIndex);
-    };
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
-      <Carousel.Item >
-        <img className="Path_1_Class d-block w-100" src={require('../img/900x520_piano-min.jpg')} alt="First slide" />
-        <Carousel.Caption >
-          <div class="Any_succesfull_career_starts_w_Class">
-            <p>Any succesfull career starts with good education</p>
+    <>
+      <div
+        id="carouselExampleCaptions"
+        className="carousel slide"
+        data-ride="carousel"
+      >
+        <ol className="carousel-indicators">
+          <li
+            data-target="#carouselExampleCaptions"
+            data-slide-to="0"
+            className="active"
+          ></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+        </ol>
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <img src={require('../img/photo-1530800226802-6dc8fe3b9900.jpg')} className="d-block card-img img-fluid" alt="drummer"></img>
+            <div className="carousel-caption card-img-overlay align-self-center caption-masterhead">
+              <h2>Any succesful career starts with good education</h2>
+            </div>
           </div>
-        </Carousel.Caption>
-      </Carousel.Item>
-
-      <Carousel.Item>
-        <img className="Path_1_Class" src={require('../img/d1.jpg')} alt="Second slide" />
-
-        <Carousel.Caption className="Knowledge_is_power_Class">
-          <div class="Any_succesfull_career_starts_w_Class">
-            <p>Any succesfull career starts with good education</p>
+          <div className="carousel-item">
+            <img src={require('../img/photo-1513829596324-4bb2800c5efb.jpg')} className="d-block w-100 card-img img-fluid" alt="girl" ></img>
+            <div className="carousel-caption card-img-overlay align-self-center caption-masterhead">
+              <h2>Study music online at home</h2>
+            </div>
           </div>
-        </Carousel.Caption>
-      </Carousel.Item>
-
-      <Carousel.Item>
-        <img className="Path_1_Class" src={require('../img/hailey-reed-Martin+Sepia+crop.jpg')} alt="Third slide" /> 
-
-        <Carousel.Caption className="Knowledge_is_power_Class">
-          <div class="Any_succesfull_career_starts_w_Class">
-            <span>Any succesfull career starts with good education</span>
+          <div className="carousel-item">
+            <img src={require('../img/photo-1511379938547-c1f69419868d.jpg')} className="d-block w-100 card-img img-fluid" alt="instruments" ></img>
+            <div className="carousel-caption card-img-overlay align-self-center caption-masterhead">
+              <h2>Start from today</h2>
+            </div>
           </div>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
+        </div>
+      </div>
+    </>
   );
 }
