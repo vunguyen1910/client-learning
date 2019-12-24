@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Col, Row, Button, Modal, Form, Tabs, Tab } from "react-bootstrap";
 import Markdown from "react-markdown";
-import Helmet from 'react-helmet'
+import Helmet from "react-helmet";
 
 export default function VideoLearning(props) {
   const [recourse, setReCourse] = useState({});
@@ -152,9 +152,9 @@ export default function VideoLearning(props) {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          "title": title,
-          "body": body,
-          "recourse_id": id
+          title: title,
+          body: body,
+          recourse_id: id
         })
       }
     );
@@ -181,72 +181,53 @@ export default function VideoLearning(props) {
   };
 
   const editDoc = async id => {
-    const resp = await fetch(`${process.env.REACT_APP_URL_DATABASE}/recourse/${id}/edit-doc`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Token ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        "title": editTitle,
-        "body": editBody
-      })
-    });
+    const resp = await fetch(
+      `${process.env.REACT_APP_URL_DATABASE}/recourse/${id}/edit-doc`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          title: editTitle,
+          body: editBody
+        })
+      }
+    );
     if (resp.ok) {
       getDoc();
       setEditModal(false);
     }
   };
-
+  console.log(props.currentUser);
   return (
-    <div>
-        <Helmet>
+    <div className="container mt-5">
+      <Helmet>
         <title>Watch video and read documentation</title>
-        </Helmet>
-      <Row
-        className="video"
-        style={{
-          position: "relative",
-          paddingBottom: "56.25%" /* 16:9 */,
-          paddingTop: 25,
-          marginTop: "20px",
-          height: 0,
-          marginLeft: "20px",
-          marginRight: "20px"
-        }}
-      >
-        <Col>
+      </Helmet>
+      <div className="row">
+        <div className="col-md-6">
           <iframe
-            style={{
-              position: "relative",
-              top: 0,
-              left: 0,
-              width: "50vw",
-              height: "50vh"
-            }}
-            src={`https://www.youtube.com/embed/${cutVideo}`}
-            frameBorder="0"
-          />
-          <div
-            style={{
-              borderBottom: "5px ridge rgba(99,99,99,0.34)",
-              borderRadius: "20px"
-            }}
-          >
-            <h1 className="ml-5">{recourse && recourse.title}</h1>
-            <p className="ml-5">{recourse && recourse.desc}</p>
-          </div>
-        </Col>
-        <Col>
-          {props.currentUser ? (
-            <Button onClick={() => openModal()}>Upload document</Button>
-          ) : (
-            ""
-          )}
-          <h2>Document here if you want to read</h2>
-          {renderDoc}
-        </Col>
-      </Row>
+              style={{
+                width: "100%",
+                height: "100%"
+              }}
+              src={`https://www.youtube.com/embed/${cutVideo}`}
+              frameBorder="0"
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen="allowfullscreen"
+              mozallowfullscreen="mozallowfullscreen" 
+              msallowfullscreen="msallowfullscreen" 
+              oallowfullscreen="oallowfullscreen" 
+              webkitallowfullscreen="webkitallowfullscreen"
+            />
+              <h1>{recourse && recourse.title}</h1>
+        </div>
+        <div className="col-md-6">
+          something
+        </div>
+      </div>
       <Modal
         style={{
           top: "50%",

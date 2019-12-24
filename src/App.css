@@ -82,3 +82,58 @@ html{
 	color: white;
 	background-color: #020066;
 }
+.create-course{
+	background-color: #00006a;
+	border-radius: 37px;
+	
+}
+.create-course-label{
+	color: white;
+	font-size: 18px;
+	font-weight: 600;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal; 
+}
+.title-card-course{
+	font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.24px;
+  color: #c62077;
+}
+.text-card-course{
+	font-size: 18px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: -0.18px;
+	color: #ffffff;
+}
+.card-course{
+	max-width: 40rem;
+	object-fit: contain;
+	border-radius: 37px;
+	background-color: #00006a;
+}
+.title-video{
+	font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.24px;
+  color: #020066;
+}
+.desc-video{
+	font-size: 18px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.18px;
+  color: #000000;
+}

@@ -54,6 +54,9 @@ export default function NavBar(props) {
                 <li className="nav-item">
                   <div className="nav-link active mx-5" onClick={()=>logOut()}>Logout</div>
                 </li>
+                <li className="nav-item">
+                  <Link to="/create-course" className="nav-link active mx-5">Create Courses</Link>
+                </li>
               </>
             ) : (
               <>
