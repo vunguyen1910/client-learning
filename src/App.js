@@ -49,6 +49,7 @@ function App(props) {
     }
 
   };
+  console.log(currentUser,"current user")
   return (
     <div className="App">
       <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />

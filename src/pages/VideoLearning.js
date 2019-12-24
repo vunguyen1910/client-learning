@@ -21,12 +21,14 @@ export default function VideoLearning(props) {
   const [editBody, setEditBody] = useState("");
   const [editID, setEditID] = useState();
 
+  const [comment, setcomment] = useState("");
+  const [cmtRender, setCmtRender] = useState([]);
+  const [editcomment, setEditComment] = useState("");
   const closeModalDoc = () => setModalDoc(false);
   const closeEditModal = () => setEditModal(false);
 
   useEffect(() => {
     getReCourse();
-    getDoc();
   }, []);
 
   const openModal = () => {
@@ -75,23 +77,9 @@ export default function VideoLearning(props) {
       const a = data.data.url.split("=")[1];
       setCutVideo(a);
       setReCourse(data.data);
+      setDoc(data.data.document);
+      setCmtRender(data.data.comments);
     } else alert("cant fetch");
-  };
-
-  //handle doc
-  const getDoc = async () => {
-    const resp = await fetch(
-      `${process.env.REACT_APP_URL_DATABASE}/recourse/${id}/render_document`,
-      {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    );
-    if (resp.ok) {
-      const data = await resp.json();
-      setDoc(data.data);
-    }
   };
   const renderDoc = docs.map(doc => {
     return (
@@ -105,22 +93,22 @@ export default function VideoLearning(props) {
         >
           <p
             style={{
-              borderStyle: "inset",
               margin: "20px",
               cursor: "pointer",
               wordWrap: "break-word"
             }}
+            className="border border-info rounded-pill p-2"
           >
             {doc.title}
           </p>
         </div>
-        {(props.currentUser && props.currentUser.id) == doc.teacher_id ? (
+        {(props.currentUser && props.currentUser.id) === doc.teacher_id ? (
           <>
             <Button
               onClick={() => {
                 delete_doc(doc.id);
               }}
-              className="mr-5"
+              className="mr-5 btn-dark ml-5"
             >
               Delete
             </Button>
@@ -162,7 +150,7 @@ export default function VideoLearning(props) {
       const data = await resp.json();
       if (data.success) {
         setIsOpen(false);
-        getDoc();
+        getReCourse();
       }
     }
   };
@@ -177,7 +165,7 @@ export default function VideoLearning(props) {
         }
       }
     );
-    if (resp.ok) getDoc();
+    if (resp.ok) getReCourse();
   };
 
   const editDoc = async id => {
@@ -196,11 +184,99 @@ export default function VideoLearning(props) {
       }
     );
     if (resp.ok) {
-      getDoc();
+      getReCourse();
       setEditModal(false);
     }
   };
-  console.log(props.currentUser);
+  const post_comment = async e => {
+    e.preventDefault();
+    const resp = await fetch(
+      `${process.env.REACT_APP_URL_DATABASE}/recourse/${id}/create-comment`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          comment: comment
+        })
+      }
+    );
+    if (resp.ok) {
+      setcomment("");
+      getReCourse();
+    }
+  };
+  const delete_comment = async id_cmt => {
+    const resp = await fetch(
+      `${process.env.REACT_APP_URL_DATABASE}/recourse/${id_cmt}/delete-comment`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("token")}`
+        }
+      }
+    );
+    if (resp.ok) getReCourse();
+  };
+  const editComment = async(e, cmt_id) =>{
+    e.preventDefault()
+    const resp = await fetch(`${process.env.REACT_APP_URL_DATABASE}/recourse/${cmt_id}/edit-comment`,{
+      method: "PUT",
+      headers:{
+        Authorization: `Token ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "comment": editcomment
+      })
+    })
+    if(resp.ok) getReCourse()
+  }
+  const render_comment = cmtRender.map(cmt => {
+    return (
+      <>
+        <div className="comment">
+          <div className="author-comment">{cmt.author.name}</div>
+          <p className="body-comment">{cmt.body}</p>
+        </div>
+        {props.currentUser &&
+          (props.currentUser.user.id === cmt.author.id ? (
+            <>
+              <div
+                className="btn rounded-pill p-3 m-2"
+                data-toggle="collapse"
+                href={`#collapseExample${cmt.id}`}
+                role="button"
+                aria-expanded="false"
+                aria-controls={`collapseExample${cmt.id}`}
+              >
+                Edit
+              </div>              
+              <div
+                className="btn rounded-pill p-3 px-5 btn-dark m-2"
+                onClick={() => delete_comment(cmt.id)}
+              >
+                Delete
+              </div>
+              <div class="collapse" id={`collapseExample${cmt.id}`}>
+                <form>
+                  <input className="form-control" onChange={(e)=> setEditComment(e.target.value)} defaultValue={cmt.body}/>
+                  <button
+                  data-toggle="collapse"
+                  aria-controls={`collapseExample${cmt.id}`}
+                  href={`#collapseExample${cmt.id}`}
+                  type="submit" onClick = {e => editComment(e, cmt.id)}>Change</button>
+                </form>
+              </div>
+            </>
+          ) : (
+            ""
+          ))}
+      </>
+    );
+  });
   return (
     <div className="container mt-5">
       <Helmet>
@@ -208,26 +284,79 @@ export default function VideoLearning(props) {
       </Helmet>
       <div className="row">
         <div className="col-md-6">
-          <iframe
+          <div style={{ height: "500px" }}>
+            <iframe
               style={{
                 width: "100%",
                 height: "100%"
               }}
               src={`https://www.youtube.com/embed/${cutVideo}`}
               frameBorder="0"
-              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" 
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen="allowfullscreen"
-              mozallowfullscreen="mozallowfullscreen" 
-              msallowfullscreen="msallowfullscreen" 
-              oallowfullscreen="oallowfullscreen" 
+              mozallowfullscreen="mozallowfullscreen"
+              msallowfullscreen="msallowfullscreen"
+              oallowfullscreen="oallowfullscreen"
               webkitallowfullscreen="webkitallowfullscreen"
             />
-              <h1>{recourse && recourse.title}</h1>
+          </div>
+          <h1 className="pt-3 title-video">
+            <i className="fas fa-book-open mr-3"></i>
+            {recourse && recourse.title}
+          </h1>
+          <p className="pt-2 desc-video">
+            <i class="fas fa-chalkboard mr-3" style={{ color: "#020066" }}></i>
+            {recourse && recourse.desc}
+          </p>
+          <hr className="mt-5" />
         </div>
         <div className="col-md-6">
-          something
+          {props.currentUser &&
+            (props.currentUser.user.role === "teacher" ? (
+              <Button
+                onClick={() => openModal()}
+                className="rounded-pill input-button px-4"
+                style={{ backgroundColor: "#c42677" }}
+              >
+                Upload document
+              </Button>
+            ) : (
+              ""
+            ))}
+          <h2>Document here if you want to read</h2>
+          {renderDoc}
+          <hr />
         </div>
       </div>
+      <div className="row">
+        <div className="col-md-6">
+          <div className="mb-3">
+            <h2 className="title-comment mb-3">Comment</h2>
+            <form>
+              <div className="form-group">
+                <input
+                  type="text-aria"
+                  className="form-control"
+                  placeholder="Ask teacher"
+                  className="rounded-pill w-100"
+                  style={{ height: "50px" }}
+                  onChange={e => setcomment(e.target.value)}
+                />
+              </div>
+              <button
+                type="submit"
+                className="btn login-button mb-3"
+                onClick={e => post_comment(e)}
+              >
+                Comment
+              </button>
+            </form>
+            {render_comment}
+          </div>
+        </div>
+        <div className="col-md-6">{/* spacing */}</div>
+      </div>
+
       <Modal
         style={{
           top: "50%",
