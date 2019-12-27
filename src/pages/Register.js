@@ -40,7 +40,7 @@ export default function Register(props) {
           <img src={require("../img/login-img.png")} />
         </div>
         <div className="col-lg-6 pr-5">
-          <h1 className="title-signin text-center">Become A Tutor</h1>
+          <h1 className="title-signin text-center">Sign up</h1>
           <form
             className="container needs-validation"
             novalidate

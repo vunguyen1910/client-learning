@@ -139,7 +139,7 @@ export default function NavBar(props) {
                     className="nav-link btn btn-outline-secondary rounded-pill active px-3"
                     to="/register"
                   >
-                    Become A Tutor
+                    Sign Up
                   </Link>
                 </li>
               </>
