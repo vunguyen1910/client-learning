@@ -6,6 +6,9 @@ export default function CourseSubject(props) {
   const { subject } = useParams();
   const [courseinSubject, setCourse] = useState([]);
   const [state, setState] = useState("");
+  useEffect(() => {
+    getSourceSubject();
+  }, []);
   const getSourceSubject = async () => {
     const resp = await fetch(
       `${process.env.REACT_APP_URL_DATABASE}/course/${subject}`,
@@ -38,9 +41,6 @@ export default function CourseSubject(props) {
       getSourceSubject();
     }
   };
-  useEffect(() => {
-    getSourceSubject();
-  }, []);
   const courseRender = courseinSubject.map(course => {
     return (
       <div className="col-md-6 mt-5">
@@ -50,13 +50,15 @@ export default function CourseSubject(props) {
             <h5 className="card-title title-card-course" style={{height:"5vh"}}>{course.name}</h5>
             <p className="card-text text-card-course" style={{height:"15vh"}}>{course.desc}</p>
             <Link to={`/recouse/${course.id}`} className="btn login-button px-5">Watch course</Link>
-            <Link to={`/course/${course.id}/edit`} className="btn btn-primary mx-2 px-4 rounded-pill">Edit</Link>
-            <div className="btn btn-dark rounded-pill px-4" onClick={()=>deleteCourse(course.id)}>Delete</div>
+            {props. currentUser && (props.currentUser.id == course.user_id ? <><Link to={`/course/${course.id}/edit`} className="btn btn-primary mx-2 px-4 rounded-pill">Edit</Link>
+            <div className="btn btn-dark rounded-pill px-4" onClick={()=>deleteCourse(course.id)}>Delete</div></> : "")}
+
           </div>
         </div>
       </div>
     );
   });
+  console.log(courseinSubject,"course in subject")
   return (
     <div className="container my-5">
       <Helmet>
@@ -69,9 +71,3 @@ export default function CourseSubject(props) {
     </div>
   );
 }
-// {avata_url: "https://scontent.fsgn8-1.fna.fbcdn.net/v/t1.0-9/67…a&oh=257f397526577e2995bd3f9132b1a2ee&oe=5E8199F6", desc: "a", email: "melodycenter19@gmail.com", name: "Nguyễn Vũ", phone: 912853677}
-// avata_url: "https://scontent.fsgn8-1.fna.fbcdn.net/v/t1.0-9/67807878_2325970770850640_5043512832209977344_n.jpg?_nc_cat=110&_nc_ohc=c8FQqSHpJUAAQltdFO5MrPf2mCLhMyM8HGENLoqyJYtSoLU9V_eA9xZDA&_nc_ht=scontent.fsgn8-1.fna&oh=257f397526577e2995bd3f9132b1a2ee&oe=5E8199F6"
-// desc: "a"
-// email: "melodycenter19@gmail.com"
-// name: "Nguyễn Vũ"
-// phone: 912853677}

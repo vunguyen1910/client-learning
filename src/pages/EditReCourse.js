@@ -49,7 +49,7 @@ export default function EditReCourse(props) {
       {
         method: "PUT",
         headers: {
-          Authorization: localStorage.getItem("token"),
+          Authorization: `Token ${localStorage.getItem("token")}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({

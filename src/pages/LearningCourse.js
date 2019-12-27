@@ -45,15 +45,14 @@ export default function LearningCourse(props) {
 
   const recourseRender = reCourse.map(recourse => {
     return (
-      <Card className="mt-2">
+      <Card className="mt-2" key={recourse.id}>
         <Card.Body>
           <Card.Title>{recourse.title}</Card.Title>
           <Card.Text>{recourse.desc}</Card.Text>
           <Link to={`/video/${recourse.id}`} className="btn btn-primary">
             View
           </Link>
-          {props.currentUser ? (
-            props.currentUser.id === recourse.teacher_id ? (
+          {props.currentUser && (props.currentUser.id === recourse.author.id ?
               <>
                 <Button
                   onClick={() => {
@@ -70,24 +69,19 @@ export default function LearningCourse(props) {
                   Edit
                 </Link>
               </>
-            ) : (
-              ""
-            )
-          ) : (
-            ""
-          )}
+            : "")}
         </Card.Body>
       </Card>
     );
   });
-
+console.log(reCourse, "recourse")
   const createReCourse = async () => {
     const resp = await fetch(
       `${process.env.REACT_APP_URL_DATABASE}/recourse/create`,
       {
         method: "POST",
         headers: {
-          Authorization: localStorage.getItem("token"),
+          Authorization: `Token ${localStorage.getItem("token")}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({

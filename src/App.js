@@ -14,18 +14,25 @@ import EditCourse from "./pages/EditCourse";
 import LearningCourse from "./pages/LearningCourse";
 import EditReCourse from "./pages/EditReCourse";
 import VideoLearning from "./pages/VideoLearning";
-import ClipLoader from "react-spinners";
 
 function App(props) {
   const [currentUser, setCurrentUser] = useState(null);
-  const [loaded, setLoaded] = useState(false);
   const [course, setCourse] = useState([]);
   const [recourse, setrecourse] = useState([]);
+  const [notification, setNotification] = useState([])
+  const [countNotice, setCountNotice] = useState(0);
 
   useEffect(() => {
     getUser();
     window.history.replaceState({}, document.title, window.location.pathname);
+    getNotification()
+    const interval = setInterval(function(){
+      getNotification()
+      console.log('get notice')
+    }, 5000)
+    return interval
   }, []);
+
   const getUser = async () => {
     const local = localStorage.getItem("token");
     const accessToken =
@@ -41,18 +48,31 @@ function App(props) {
     if (resp.ok) {
       const data = await resp.json();
       localStorage.setItem("token", token);
-      setCurrentUser(data);
+      setCurrentUser(data.user);
     } else {
       localStorage.clear("token");
       setCurrentUser(null);
-      setLoaded(true);
     }
 
   };
-  console.log(currentUser,"current user")
+
+  const getNotification = async() => {
+    const resp = await fetch(`${process.env.REACT_APP_URL_DATABASE}/notification`,{
+      headers:{
+        Authorization: `Token ${localStorage.getItem("token")}`
+      }
+    })
+    if (resp.ok){
+      const data = await resp.json()
+      setNotification(data.data)
+      setCountNotice(data.countUnseen)
+    }
+  }
+
+console.log(countNotice)
   return (
     <div className="App">
-      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} notification={notification} getNotification={getNotification} countNotice={countNotice}/>
       <Switch>
         <Route
           path="/login"

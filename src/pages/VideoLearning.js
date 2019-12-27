@@ -136,7 +136,7 @@ export default function VideoLearning(props) {
       {
         method: "POST",
         headers: {
-          Authorization: localStorage.getItem("token"),
+          Authorization: `Token ${localStorage.getItem("token")}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -242,7 +242,7 @@ export default function VideoLearning(props) {
           <p className="body-comment">{cmt.body}</p>
         </div>
         {props.currentUser &&
-          (props.currentUser.user.id === cmt.author.id ? (
+          (props.currentUser.id === cmt.author.id ? (
             <>
               <div
                 className="btn rounded-pill p-3 m-2"
@@ -312,7 +312,7 @@ export default function VideoLearning(props) {
         </div>
         <div className="col-md-6">
           {props.currentUser &&
-            (props.currentUser.user.role === "teacher" ? (
+            (props.currentUser.role === "teacher" ? (
               <Button
                 onClick={() => openModal()}
                 className="rounded-pill input-button px-4"
@@ -332,7 +332,8 @@ export default function VideoLearning(props) {
         <div className="col-md-6">
           <div className="mb-3">
             <h2 className="title-comment mb-3">Comment</h2>
-            <form>
+            {props.currentUser ? <>
+              <form>
               <div className="form-group">
                 <input
                   type="text-aria"
@@ -351,6 +352,7 @@ export default function VideoLearning(props) {
                 Comment
               </button>
             </form>
+            </>:<></>}
             {render_comment}
           </div>
         </div>
