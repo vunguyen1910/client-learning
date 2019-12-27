@@ -1,5 +1,20 @@
+:root{
+	--main-bg-color:#464159;
+	--main-text-color: #c7f0db;
+	--main-title-color: #8bbabb;
+	--main-button-color: #6c7b95;
+}
+
+
+
+
 .navbar{
-	background-color: #030064;
+	background-color: var(--main-bg-color);
+}
+.md-avatar {
+	vertical-align: middle;
+	width: 50px;
+	height: 50px;
 }
 body{
 	font-family: 'Libre Franklin', sans-serif;
@@ -18,14 +33,14 @@ html{
 .aboutus{
 	border-radius: 40px;
 	margin-top: 5em;
-	background-color: #010068;
-	color: white;
+	background-color: var(--main-bg-color);
+	color: var(--main-text-color);
 }
 .text-aboutus{
 	font-size: 24px;
 }
 .course{
-	background-color: #00006a;
+	background-color: var(--main-bg-color);
 }
 .card{
 	border-radius: 40px;
@@ -33,21 +48,21 @@ html{
 .title-course{
   font-size: 24px;
   font-weight: bold;
-  color: #00006c;
+  color: var(--main-title-color);
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 .btn-course{
-	background-color: #c42677;
+	background-color: var(--main-button-color);
 	color: white;
 	font-size: 18px;
 	border: none;
 }
 .btn-course:hover{
-	background-color:#010068 ;
+	background-color:var(--main-title-color);
 }
 .title-signin{
-	color: #00006c;
+	color: var(--main-title-color);
 	font-size: 24px;
   font-weight: bold;
   padding-bottom: 1em;
@@ -65,30 +80,30 @@ html{
 	font-size: 18px;
 	font-weight: 600;
 	letter-spacing: -0.18px;
-	color: #c62077;
+	color: var(--main-button-color);
 }
 .login-button{
 	object-fit: contain;
 	border-radius: 17.5px;
-	background-color: #c42677;
+	background-color: var(--main-button-color);
 	font-size: 18px;
 	font-weight: 600;
-	color: white;
+	color: var(--main-text-color);
 }
 .login-facebook{
 	font-size: 18px;
 	font-weight: 600;
 	border-radius: 17.5px;
-	color: white;
-	background-color: #020066;
+	color: var(--main-text-color);
+	background-color: var(--main-button-color);
 }
 .create-course{
-	background-color: #00006a;
+	background-color: var(--main-button-color);
 	border-radius: 37px;
 	
 }
 .create-course-label{
-	color: white;
+	color: var(--main-text-color);
 	font-size: 18px;
 	font-weight: 600;
 	font-stretch: normal;
@@ -102,7 +117,7 @@ html{
   font-style: normal;
   line-height: normal;
   letter-spacing: -0.24px;
-  color: #c62077;
+  color: var(--main-title-color);
 }
 .text-card-course{
 	font-size: 18px;
@@ -111,13 +126,13 @@ html{
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: -0.18px;
-	color: #ffffff;
+	color: var(--main-text-color);
 }
 .card-course{
 	max-width: 40rem;
 	object-fit: contain;
 	border-radius: 37px;
-	background-color: #00006a;
+	background-color: var(--main-button-color);
 }
 .title-video{
 	font-size: 24px;
@@ -126,7 +141,7 @@ html{
   font-style: normal;
   line-height: normal;
   letter-spacing: -0.24px;
-  color: #020066;
+  color: var(--main-title-color);
 }
 .desc-video{
 	font-size: 18px;
@@ -144,12 +159,12 @@ html{
   font-style: normal;
   line-height: normal;
   letter-spacing: -0.24px;
-  color: #c62077;
+  color: var(--main-title-color);
   margin-top: 20px;
 }
 .comment{
 	border-radius: 20px;
-	background-color: #ecedef;
+	background-color: var(--main-bg-color);
 }
 .author-comment{
 	font-size: 18px;
@@ -158,7 +173,7 @@ html{
   font-style: normal;
   line-height: normal;
   letter-spacing: -0.18px;
-  color: #c81877;
+  color: var(--main-text-color);
 	padding-top: 20px;
 	padding-left:20px;
 }

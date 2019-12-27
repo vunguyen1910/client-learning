@@ -123,8 +123,7 @@ console.log(reCourse, "recourse")
       <Helmet>
         <title>{title}</title>
       </Helmet>
-      {(props.currentUser && props.currentUser.teacher_id) ===
-      reCourse.teacher_id ? (
+      {props.currentUser && (props.currentUser.role === "teacher" ? <>
         <section className="container create-course my-5">
           <Form
             noValidate
@@ -181,9 +180,9 @@ console.log(reCourse, "recourse")
             </div>
           </Form>
         </section>
-      ) : (
+      </> : (
         ""
-      )}
+      ))}
       {state}
       {recourseRender}
     </div>

@@ -30,8 +30,8 @@ export default function NavBar(props) {
         }
       }
     );
-    if (resp.ok){
-      props.getNotification()
+    if (resp.ok) {
+      props.getNotification();
     }
   };
   const noticeRender = props.notification.map(notice => {
@@ -82,26 +82,36 @@ export default function NavBar(props) {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto"></ul>
-          <div className="dropdown">
-            <button
-              className="btn dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i
-                className="fas fa-globe-asia"
-                style={{ color: props.countNotice === 0 ? "white" : "red" }}
-              >
-                {props.countNotice !== 0 ? ` ${props.countNotice}` : ""}
-              </i>
-            </button>
-            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              {noticeRender}
-            </div>
-          </div>
+          {props.currentUser ? (
+            <>
+              <div className="dropdown">
+                <button
+                  className="btn dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i
+                    className="fas fa-globe-asia"
+                    style={{ color: props.countNotice === 0 ? "white" : "red" }}
+                  >
+                    {props.countNotice !== 0 ? ` ${props.countNotice}` : ""}
+                  </i>
+                </button>
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  {noticeRender}
+                </div>
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
+
           <ul className="navbar-nav col-auto">
             <li className="nav-item">
               <LinkTo
@@ -113,18 +123,42 @@ export default function NavBar(props) {
             </li>
             {props.currentUser ? (
               <>
-                <li className="nav-item">
-                  <div
-                    className="nav-link active mx-5"
-                    onClick={() => logOut()}
+                <li className="dropleft show nav-item mx-5">
+                  <img
+                    className="dropdown-toggle md-avatar rounded-circle"
+                    role="button"
+                    id="dropdownMenuLink"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    src={props.currentUser && props.currentUser.avata_url}
+                  />
+
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuLink"
                   >
-                    Logout
-                  </div>
-                </li>
-                <li className="nav-item">
-                  <Link to="/create-course" className="nav-link active mx-5">
-                    Create Courses
-                  </Link>
+                    <li className="nav-item">
+                      <div className="dropdown-item" onClick={() => logOut()}>
+                        Logout
+                      </div>
+                    </li>
+                    {props.currentUser &&
+                      (props.currentUser.role === "teacher" ? (
+                        <>
+                          <li className="nav-item">
+                            <Link
+                              to="/create-course"
+                              className="dropdown-item"
+                            >
+                              Create Courses
+                            </Link>
+                          </li>
+                        </>
+                      ) : (
+                        <></>
+                      ))}
+                  </ul>
                 </li>
               </>
             ) : (

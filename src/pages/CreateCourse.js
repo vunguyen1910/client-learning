@@ -47,7 +47,7 @@ export default function Register(props) {
       } else setState("You hasnt posted the course");
     } else alert("False to post");
   };
-
+if (props.currentUser && props.currentUser.role !== "teacher") history.goBack()
   return (
     <>
       <div>
