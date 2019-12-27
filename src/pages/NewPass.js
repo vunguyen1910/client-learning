@@ -10,7 +10,7 @@ export default function Forgot() {
 
     const [token, setToken] = useState(accessToken)
     const history = useHistory()
-
+console.log(input.value)
   const getNewPass = async() => {
     if(input){
         const resp = await fetch(`${process.env.REACT_APP_URL_DATABASE}/new-password`, {
@@ -29,21 +29,17 @@ export default function Forgot() {
     }  
   }
 console.log(token)
-  const handelChange = e => {
-    e.preventDefault();
-    setInput({ ...input, [e.target.name]: e.target.value });
-  };
   const handelSubmit = e => {
     e.preventDefault();
     getNewPass()
   };
-
+console.log(input)
   if (token == null) history.push('/')
   return (
     <Form
       className="container"
       onSubmit={e => handelSubmit(e)}
-      onChange={e => handelChange(e)}
+      onChange={e => setInput(e.target.value)}
     >
       <Form.Group controlId="formBasicEmail">
         <Form.Label>New Password</Form.Label>
