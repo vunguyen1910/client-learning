@@ -26,11 +26,11 @@ function App(props) {
     getUser();
     window.history.replaceState({}, document.title, window.location.pathname);
     getNotification()
-    // const interval = setInterval(function(){
-    //   getNotification()
-    //   console.log('get notice')
-    // }, 5000)
-    // return interval
+    const interval = setInterval(function(){
+      getNotification()
+      console.log('get notice')
+    }, 5000)
+    return interval
   }, []);
 
   const getUser = async () => {
