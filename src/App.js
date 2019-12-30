@@ -14,6 +14,7 @@ import EditCourse from "./pages/EditCourse";
 import LearningCourse from "./pages/LearningCourse";
 import EditReCourse from "./pages/EditReCourse";
 import VideoLearning from "./pages/VideoLearning";
+import CourseTeacher from "./pages/CourseTeacher";
 
 function App(props) {
   const [currentUser, setCurrentUser] = useState(null);
@@ -102,6 +103,7 @@ function App(props) {
             <EditCourse currentUser={currentUser} course={course} {...props}/>
           )}
         />
+        <Route path="/course/teacher/:id" render={()=> <CourseTeacher currentUser={currentUser} setCourse={setCourse} {...props}/>}/>
         <Route
           path="/course/:subject"
           render={() => (
