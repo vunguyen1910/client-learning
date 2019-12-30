@@ -9,7 +9,7 @@ export default function Courses() {
             <img
               src={require("../img/course-guitar.png")}
               className="card-img-top"
-              alt="..."
+              alt="guitar course"
             />
             <div className="card-body">
               <h5 className="card-title text-center title-course">Guitar</h5>
@@ -31,7 +31,7 @@ export default function Courses() {
             <img
               src={require("../img/course-piano.png")}
               className="card-img-top"
-              alt="..."
+              alt="piano course"
             />
             <div className="card-body">
               <h5 className="card-title text-center title-course ">Piano</h5>
@@ -53,7 +53,7 @@ export default function Courses() {
             <img
               src={require("../img/course-violin.png")}
               className="card-img-top"
-              alt="..."
+              alt="violin course"
             />
             <div className="card-body">
               <h5 className="card-title text-center title-course">Violin</h5>

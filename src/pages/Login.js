@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import {useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export default function Login(props) {

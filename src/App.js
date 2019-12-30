@@ -29,8 +29,8 @@ function App(props) {
     const interval = setInterval(function(){
       getNotification()
       console.log('get notice')
-    }, 5000)
-    return interval
+    }, 30000)
+
   }, []);
 
   const getUser = async () => {
@@ -68,8 +68,6 @@ function App(props) {
       setCountNotice(data.countUnseen)
     }
   }
-
-console.log(countNotice)
   return (
     <div className="App">
       <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} notification={notification} getNotification={getNotification} countNotice={countNotice}/>

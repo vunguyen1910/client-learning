@@ -27,18 +27,17 @@ export default function Forgot() {
         forgot()
     }
     return (
-        <Form className="container" onSubmit={e=>handelSubmit(e)} onChange={e=> handelChange(e)}>
+      <div className="container form-forgot text-center ">
+        <Form onSubmit={e=>handelSubmit(e)} onChange={e=> handelChange(e)}>
           <h3 style={{color: "green"}}>{state}</h3>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" name="email" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className="login-button mt-5">
             Submit
           </Button>
           </Form.Group>
         </Form>
+        </div>
     )
 }

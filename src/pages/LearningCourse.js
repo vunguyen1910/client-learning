@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Button, Card, Form, Col } from "react-bootstrap";
+import { Button, Card, Form} from "react-bootstrap";
 import Helmet from "react-helmet";
 export default function LearningCourse(props) {
   const [reCourse, setReCourse] = useState([]);
@@ -10,10 +10,14 @@ export default function LearningCourse(props) {
   const [validated, setValidated] = useState(false);
   const [state, setState] = useState("");
   const { id } = useParams();
+  const [course, setCourse] = useState({})
 
   useEffect(() => {
     getReCourse();
+    get_singele_course()
   }, []);
+
+
 
   const handleSubmit = event => {
     const form = event.currentTarget;
@@ -27,6 +31,19 @@ export default function LearningCourse(props) {
     }
   };
 
+  const get_singele_course = async() =>{
+    const resp = await fetch( `${process.env.REACT_APP_URL_DATABASE}/course/single-course/${id}`,
+    {
+      headers:{
+        "Content-Type": "application/json"
+      }
+    })
+    if (resp.ok){
+      const data = await resp.json()
+      setCourse(data.course)
+    }
+  }
+  console.log(course,"course ....")
   const getReCourse = async () => {
     const resp = await fetch(
       `${process.env.REACT_APP_URL_DATABASE}/recourse/${id}`,
@@ -74,7 +91,6 @@ export default function LearningCourse(props) {
       </Card>
     );
   });
-console.log(reCourse, "recourse")
   const createReCourse = async () => {
     const resp = await fetch(
       `${process.env.REACT_APP_URL_DATABASE}/recourse/create`,
@@ -117,12 +133,31 @@ console.log(reCourse, "recourse")
       getReCourse();
     }
   };
-
   return (
     <div className="container">
       <Helmet>
         <title>{title}</title>
       </Helmet>
+      <div className="row mt-3 bg-light">
+        <div className="col-md-8 pt-5">
+          <div>
+            <h1>{course.name}</h1>
+            <p>{course.desc}</p>
+          </div>
+          <div className="row ml-3">
+            <div className="col-md-2">
+              <img src={course.user_id && course.user_id.avata_url} className="md-avatar rounded-circle" style={{width:"70px", height:"auto"}}/>
+            </div>
+            <div className="col-md-10">
+              <p><strong>{course.user_id && course.user_id.name}</strong></p>
+              <p>{course.user_id && course.user_id.desc}</p>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <img src={course.img} style={{width: "30vw"}}/>
+        </div>
+      </div>
       {props.currentUser && (props.currentUser.role === "teacher" ? <>
         <section className="container create-course my-5">
           <Form

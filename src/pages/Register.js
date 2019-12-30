@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Col, InputGroup } from "react-bootstrap";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 
 export default function Register(props) {
   const [input, setInput] = useState({});
@@ -11,7 +10,6 @@ export default function Register(props) {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
   const handleSubmit = event => {
-    const form = event.currentTarget;
     event.preventDefault();
     postUser();
   };
@@ -56,7 +54,8 @@ export default function Register(props) {
                 name="email"
               />
             </div>
-            <div className="form-group">
+            <div className="row">
+            <div className="form-group col-md-6">
               <label className="login-label">Full Name</label>
               <input
                 type="text"
@@ -66,8 +65,8 @@ export default function Register(props) {
                 name="name"
               />
             </div>
-            <div className="form-group">
-              <label className="login-label">Phone number</label>
+            <div className="form-group col-md-6">
+              <label className="login-label">Phone</label>
               <input
                 type="phone"
                 className="form-control rounded-pill input-login text-center"
@@ -76,7 +75,17 @@ export default function Register(props) {
                 name="phone"
               />
             </div>
-            <div className="form-group">
+            </div>
+            <div className="row">
+            <div className="col-md-6">
+            <label className="login-label">Role</label>
+            <select class="form-control rounded-pill input-login text-center mb-3" name="role">
+              <option>None</option>          
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+            </select>
+            </div>
+            <div className="form-group col-md-6">
               <label className="login-label">Avata URL</label>
               <input
                 type="url"
@@ -85,6 +94,8 @@ export default function Register(props) {
                 required
                 name="avata_url"
               />
+            </div>
+
             </div>
             <div className="form-group">
               <label className="login-label">Description</label>
@@ -96,12 +107,7 @@ export default function Register(props) {
                 name="desc"
               />
             </div>
-            <label className="login-label">Your Role</label>
-            <select class="form-control rounded-pill input-login text-center mb-3" name="role">
-              <option>None</option>          
-              <option value="student">Student</option>
-              <option value="teacher">Teacher</option>
-            </select>
+            
             <div className="form-group">
               <label className="login-label">Password</label>
               <input

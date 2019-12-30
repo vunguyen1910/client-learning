@@ -5,9 +5,6 @@
 	--main-button-color: #6c7b95;
 }
 
-
-
-
 .navbar{
 	background-color: var(--main-bg-color);
 }
@@ -186,4 +183,13 @@ html{
   letter-spacing: -0.18px;
   color: #000000;
 	padding:20px;
+}
+.form-forgot{
+	height: 40vh;
+	margin-top: 30vh;
+	width: 50vw;
+}
+.recourse-header{
+	color: var(--main-text-color);
+	background-color: var(--main-bg-color);
 }

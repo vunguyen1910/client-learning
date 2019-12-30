@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Card, Button } from "react-bootstrap";
 import Helmet from "react-helmet";
 export default function CourseSubject(props) {
   const { subject } = useParams();
@@ -47,10 +46,10 @@ export default function CourseSubject(props) {
         <div className="card card-course">
           <img src={course.img} class="card-img-top" alt="..." style={{height:"50vh"}}/>
           <div className="card-body">
-            <h5 className="card-title title-card-course" style={{height:"5vh"}}>{course.name}</h5>
-            <p className="card-text text-card-course" style={{height:"15vh"}}>{course.desc}</p>
-            <Link to={`/recouse/${course.id}`} className="btn login-button px-5">Watch course</Link>
-            {props. currentUser && (props.currentUser.id == course.user_id ? <><Link to={`/course/${course.id}/edit`} className="btn btn-primary mx-2 px-4 rounded-pill">Edit</Link>
+            <h5 className="card-title title-card-course" style={{height:"5vh"}}><i class="fas fa-music mr-3"></i>{course.name}</h5>
+            <p className="card-text text-card-course" style={{height:"15vh"}}><i class="fas fa-hand-holding-heart mr-3"></i>{course.desc}</p>
+            <Link to={`/recouse/${course.id}`} className="btn login-button px-5"><i class="fas fa-play-circle mr-2"></i> Watch course</Link>
+            {props. currentUser && (props.currentUser.id === course.user_id ? <><Link to={`/course/${course.id}/edit`} className="btn btn-primary mx-2 px-4 rounded-pill">Edit</Link>
             <div className="btn btn-dark rounded-pill px-4" onClick={()=>deleteCourse(course.id)}>Delete</div></> : "")}
 
           </div>

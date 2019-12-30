@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { HashLink as LinkTo } from "react-router-hash-link";
 export default function NavBar(props) {
@@ -36,13 +36,13 @@ export default function NavBar(props) {
   };
   const noticeRender = props.notification.map(notice => {
     return (
-      <>
+      <div key={notice.id}>
         {notice.readed === true ? (
           <Link
             className="dropdown-item btn btn-light"
             to={`/video/${notice.post_id}`}
+            key = {notice.id}
           >
-            {notice.body}
           </Link>
         ) : (
           <Link
@@ -54,7 +54,7 @@ export default function NavBar(props) {
             {notice.body}
           </Link>
         )}
-      </>
+      </div>
     );
   });
 
