@@ -49,7 +49,7 @@ export default function CourseSubject(props) {
             <h5 className="card-title title-card-course" style={{height:"5vh"}}><i class="fas fa-music mr-3"></i>{course.name}</h5>
             <p className="card-text text-card-course" style={{height:"15vh"}}><i class="fas fa-hand-holding-heart mr-3"></i>{course.desc}</p>
             <Link to={`/recouse/${course.id}`} className="btn login-button px-5"><i class="fas fa-play-circle mr-2"></i> Watch course</Link>
-            {props. currentUser && (props.currentUser.id === course.user_id ? <><Link to={`/course/${course.id}/edit`} className="btn btn-primary mx-2 px-4 rounded-pill">Edit</Link>
+            {props. currentUser && (props.currentUser.id === course.user_id.id ? <><Link to={`/course/${course.id}/edit`} className="btn btn-primary mx-2 px-4 rounded-pill"> <i class="far fa-edit"></i> Edit</Link>
             <div className="btn btn-dark rounded-pill px-4" onClick={()=>deleteCourse(course.id)}>Delete</div></> : "")}
 
           </div>

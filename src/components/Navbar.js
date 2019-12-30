@@ -118,7 +118,7 @@ export default function NavBar(props) {
                 className="nav-link border-right active px-5"
                 to="/#course"
               >
-                Courses
+                <i class="fas fa-graduation-cap"></i> Courses
               </LinkTo>
             </li>
             {props.currentUser ? (
@@ -140,7 +140,7 @@ export default function NavBar(props) {
                   >
                     <li className="nav-item">
                       <div className="dropdown-item" onClick={() => logOut()}>
-                        Logout
+                      <i class="fas fa-sign-out-alt"></i> Logout
                       </div>
                     </li>
                     {props.currentUser &&
@@ -151,7 +151,7 @@ export default function NavBar(props) {
                               to="/create-course"
                               className="dropdown-item"
                             >
-                              Create Courses
+                              <i class="fas fa-plus"></i> Create Courses
                             </Link>
                           </li>
                         </>

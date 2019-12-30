@@ -83,7 +83,7 @@ export default function LearningCourse(props) {
                   className="btn btn-primary"
                   to={`/recourse/${recourse.id}/edit`}
                 >
-                  Edit
+                  <i class="far fa-edit"></i> Edit
                 </Link>
               </>
             : "")}

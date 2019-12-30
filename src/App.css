@@ -161,7 +161,6 @@ html{
 }
 .comment{
 	border-radius: 20px;
-	background-color: var(--main-bg-color);
 }
 .author-comment{
 	font-size: 18px;

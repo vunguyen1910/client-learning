@@ -237,25 +237,33 @@ export default function VideoLearning(props) {
   const render_comment = cmtRender.map(cmt => {
     return (
       <>
-        <div className="comment">
-          <div className="author-comment">{cmt.author.name}</div>
-          <p className="body-comment">{cmt.body}</p>
+        <div className="comment bg-light">
+          <div className="author-comment text-info d-inline-flex">
+            <div>
+              <img src={cmt.author.avata_url} className="md-avatar rounded-circle"/>
+            </div>
+            <div className="ml-3 align-self-center">
+              {cmt.author.name}
+            </div>
+            
+          </div>
+          <p className="body-comment text-body">{cmt.body}</p>
         </div>
         {props.currentUser &&
           (props.currentUser.id === cmt.author.id ? (
             <>
               <div
-                className="btn rounded-pill p-3 m-2"
+                className="btn rounded-pill p-3 m-2 text-primary"
                 data-toggle="collapse"
                 href={`#collapseExample${cmt.id}`}
                 role="button"
                 aria-expanded="false"
                 aria-controls={`collapseExample${cmt.id}`}
               >
-                Edit
+                <i class="far fa-edit"></i> Edit
               </div>              
               <div
-                className="btn rounded-pill p-3 px-5 btn-dark m-2"
+                className="btn rounded-pill p-3 px-5 m-2"
                 onClick={() => delete_comment(cmt.id)}
               >
                 Delete
@@ -277,6 +285,7 @@ export default function VideoLearning(props) {
       </>
     );
   });
+  console.log(cmtRender, "cmt")
   return (
     <div className="container mt-5">
       <Helmet>
