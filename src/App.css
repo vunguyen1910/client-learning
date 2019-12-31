@@ -170,8 +170,8 @@ html{
   line-height: normal;
   letter-spacing: -0.18px;
   color: var(--main-text-color);
-	padding-top: 20px;
-	padding-left:20px;
+	margin-top: 20px;
+	margin-left:20px;
 }
 .body-comment{
 	font-size: 18px;

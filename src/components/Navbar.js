@@ -43,6 +43,7 @@ export default function NavBar(props) {
             to={`/video/${notice.post_id}`}
             key = {notice.id}
           >
+            {notice.body}
           </Link>
         ) : (
           <Link
@@ -118,7 +119,7 @@ export default function NavBar(props) {
                 className="nav-link border-right active px-5"
                 to="/#course"
               >
-                <i class="fas fa-graduation-cap"></i> Courses
+                <i className="fas fa-graduation-cap"></i> Courses
               </LinkTo>
             </li>
             {props.currentUser ? (
@@ -140,7 +141,7 @@ export default function NavBar(props) {
                   >
                     <li className="nav-item">
                       <div className="dropdown-item" onClick={() => logOut()}>
-                      <i class="fas fa-sign-out-alt"></i> Logout
+                      <i className="fas fa-sign-out-alt"></i> Logout
                       </div>
                     </li>
                     {props.currentUser &&
@@ -151,7 +152,7 @@ export default function NavBar(props) {
                               to="/create-course"
                               className="dropdown-item"
                             >
-                              <i class="fas fa-plus"></i> Create Courses
+                              <i className="fas fa-plus"></i> Create Courses
                             </Link>
                           </li>
                         </>

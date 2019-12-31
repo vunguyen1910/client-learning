@@ -24,6 +24,8 @@ export default function VideoLearning(props) {
   const [comment, setcomment] = useState("");
   const [cmtRender, setCmtRender] = useState([]);
   const [editcomment, setEditComment] = useState("");
+
+  const [recomment, setrecomment] = useState("");
   const closeModalDoc = () => setModalDoc(false);
   const closeEditModal = () => setEditModal(false);
 
@@ -90,6 +92,7 @@ export default function VideoLearning(props) {
             setBodyDoc(doc.body);
             setTitleDoc(doc.title);
           }}
+          key={doc.id}
         >
           <p
             style={{
@@ -220,72 +223,228 @@ export default function VideoLearning(props) {
     );
     if (resp.ok) getReCourse();
   };
-  const editComment = async(e, cmt_id) =>{
-    e.preventDefault()
-    const resp = await fetch(`${process.env.REACT_APP_URL_DATABASE}/recourse/${cmt_id}/edit-comment`,{
-      method: "PUT",
-      headers:{
-        Authorization: `Token ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        "comment": editcomment
-      })
-    })
-    if(resp.ok) getReCourse()
-  }
+  const editComment = async (e, cmt_id) => {
+    e.preventDefault();
+    console.log(e.target.value, "comment")
+    const resp = await fetch(
+      `${process.env.REACT_APP_URL_DATABASE}/recourse/${cmt_id}/edit-comment`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          comment: editcomment
+        })
+      }
+    );
+    if (resp.ok) getReCourse();
+  };
+  console.log(recomment, "recomment");
+
+  const post_recomment = async (e, cmt_id) => {
+    e.preventDefault();
+    const resp = await fetch(
+      `${process.env.REACT_APP_URL_DATABASE}/recourse/${cmt_id}/create-recomment`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          recomment: recomment
+        })
+      }
+    );
+    if (resp.ok) {
+      getReCourse();
+    }
+  };
+
+  const delete_recomment = async rcmt_id => {
+    const resp = await fetch(
+      `${process.env.REACT_APP_URL_DATABASE}/recourse/${rcmt_id}/delete-recomment`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("token")}`
+        }
+      }
+    );
+    if (resp.ok) getReCourse();
+  };
+
   const render_comment = cmtRender.map(cmt => {
     return (
       <>
-        <div className="comment bg-light">
-          <div className="author-comment text-info d-inline-flex">
-            <div>
-              <img src={cmt.author.avata_url} className="md-avatar rounded-circle"/>
+        <div className="comment bg-light" key={cmt.id}>
+          <div className="d-flex">
+            <div className="author-comment text-info d-inline-flex">
+              <div>
+                <img
+                  src={cmt.author.avata_url}
+                  className="md-avatar rounded-circle"
+                />
+              </div>
+              <div
+                className="ml-3 align-self-center"
+                style={{ wordWrap: "break-word" }}
+              >
+                {cmt.author.name}
+                <span className="body-comment text-body">{cmt.body}</span>
+              </div>
             </div>
-            <div className="ml-3 align-self-center">
-              {cmt.author.name}
+            <div className="dropdown mt-4">
+              <button
+                className="btn dropdown-toggle"
+                id={`dropdownMenuButton${cmt.id}`}
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              ></button>
+              <div
+                className="dropdown-menu"
+                aria-labelledby={`dropdownMenuButton${cmt.id}`}
+              >
+                <div
+                  className="btn text-primary"
+                  data-toggle="collapse"
+                  href={`#collapseExample${cmt.id}`}
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls={`collapseExample${cmt.id}`}
+                >
+                  <i className="far fa-edit"></i> Edit
+                </div>
+                <div className="btn" onClick={() => delete_comment(cmt.id)}>
+                  Delete
+                </div>
+              </div>
             </div>
-            
           </div>
-          <p className="body-comment text-body">{cmt.body}</p>
+          <div className="collapse" id={`collapseExample${cmt.id}`}>
+            <form>
+              <input
+                className="form-control"
+                onChange={e => setEditComment(e.target.value)}
+                defaultValue={cmt.body}
+              />
+              <button
+                className="btn text-primary"
+                data-toggle="collapse"
+                aria-controls={`collapseExample${cmt.id}`}
+                href={`#collapseExample${cmt.id}`}
+                type="submit"
+                onClick={e => editComment(e, cmt.id)}
+              >
+                Change
+              </button>
+            </form>
+          </div>
+          <div className="ml-5">
+            {cmt.recomment &&
+              cmt.recomment.map(recmt => {
+                return (
+                  <>
+                    <div className="d-flex" key={recmt.id}>
+                      <div className="author-comment text-info d-inline-flex">
+                        <div>
+                          <img
+                            src={recmt.author.avata_url}
+                            className="md-avatar rounded-circle"
+                          />
+                        </div>
+                        <div className="ml-3 align-self-center">
+                          {recmt.author.name}{" "}
+                          <span className="body-comment text-body">
+                            {recmt.body}
+                          </span>
+                        </div>
+                      </div>
+                      {props.currentUser &&
+                        (props.currentUser.id === recmt.author.id ? (
+                          <div className="dropdown">
+                            <div
+                              className="mt-4 btn dropdown-toggle"
+                              id={`dropdownMenuButton${recmt.id}`}
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            ></div>
+                            <div
+                              className="dropdown-menu"
+                              aria-labelledby={`dropdownMenuButton${recmt.id}`}
+                            >
+                              <div
+                                className="btn dropdown-item"
+                                onClick={() => delete_recomment(recmt.id)}
+                              >
+                                Delete
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          ""
+                        ))}
+                    </div>
+                  </>
+                );
+              })}
+          </div>
         </div>
         {props.currentUser &&
-          (props.currentUser.id === cmt.author.id ? (
+          (props.currentUser.role === "teacher" ? (
             <>
               <div
                 className="btn rounded-pill p-3 m-2 text-primary"
                 data-toggle="collapse"
-                href={`#collapseExample${cmt.id}`}
+                href={`#collapseRecomment${cmt.id}`}
                 role="button"
                 aria-expanded="false"
-                aria-controls={`collapseExample${cmt.id}`}
+                aria-controls={`collapseRecomment${cmt.id}`}
               >
-                <i class="far fa-edit"></i> Edit
-              </div>              
-              <div
-                className="btn rounded-pill p-3 px-5 m-2"
-                onClick={() => delete_comment(cmt.id)}
-              >
-                Delete
+                <i className="fas fa-comments"></i> Answer
               </div>
-              <div class="collapse" id={`collapseExample${cmt.id}`}>
-                <form>
-                  <input className="form-control" onChange={(e)=> setEditComment(e.target.value)} defaultValue={cmt.body}/>
+            </>
+          ) : (
+            ""
+          ))}
+        {props.currentUser &&
+          (props.currentUser.id === cmt.author.id ? (
+            <>
+              <div className="collapse" id={`collapseRecomment${cmt.id}`}>
+                <form
+                  className="ml-5"
+                  onSubmit={e => post_recomment(e, cmt.id)}
+                >
+                  <input
+                    className="form-control"
+                    onChange={e => setrecomment(e.target.value)}
+                  />
                   <button
-                  data-toggle="collapse"
-                  aria-controls={`collapseExample${cmt.id}`}
-                  href={`#collapseExample${cmt.id}`}
-                  type="submit" onClick = {e => editComment(e, cmt.id)}>Change</button>
+                    className="btn m-2 text-primary"
+                    data-toggle="collapse"
+                    aria-controls={`collapseRecomment${cmt.id}`}
+                    href={`#collapseRecomment${cmt.id}`}
+                    type="submit"
+                  >
+                    Post Recomment
+                  </button>
                 </form>
               </div>
             </>
           ) : (
             ""
           ))}
+          <hr/>
       </>
     );
   });
-  console.log(cmtRender, "cmt")
+
+  console.log(cmtRender, "cmt");
+
   return (
     <div className="container mt-5">
       <Helmet>
@@ -314,7 +473,7 @@ export default function VideoLearning(props) {
             {recourse && recourse.title}
           </h1>
           <p className="pt-2 desc-video">
-            <i class="fas fa-chalkboard mr-3" style={{ color: "#020066" }}></i>
+            <i className="fas fa-chalkboard mr-3" style={{ color: "#020066" }}></i>
             {recourse && recourse.desc}
           </p>
           <hr className="mt-5" />
@@ -341,27 +500,31 @@ export default function VideoLearning(props) {
         <div className="col-md-6">
           <div className="mb-3">
             <h2 className="title-comment mb-3">Comment</h2>
-            {props.currentUser ? <>
-              <form>
-              <div className="form-group">
-                <input
-                  type="text-aria"
-                  className="form-control"
-                  placeholder="Ask teacher"
-                  className="rounded-pill w-100"
-                  style={{ height: "50px" }}
-                  onChange={e => setcomment(e.target.value)}
-                />
-              </div>
-              <button
-                type="submit"
-                className="btn login-button mb-3"
-                onClick={e => post_comment(e)}
-              >
-                Comment
-              </button>
-            </form>
-            </>:<></>}
+            {props.currentUser ? (
+              <>
+                <form>
+                  <div className="form-group">
+                    <input
+                      type="text-aria"
+                      className="form-control"
+                      placeholder="Ask teacher"
+                      className="rounded-pill w-100"
+                      style={{ height: "50px" }}
+                      onChange={e => setcomment(e.target.value)}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="btn login-button mb-3"
+                    onClick={e => post_comment(e)}
+                  >
+                    Comment
+                  </button>
+                </form>
+              </>
+            ) : (
+              <></>
+            )}
             {render_comment}
           </div>
         </div>
