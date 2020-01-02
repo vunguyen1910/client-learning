@@ -192,3 +192,7 @@ html{
 	color: var(--main-text-color);
 	background-color: var(--main-bg-color);
 }
+.footer{
+	background-color: var(--main-bg-color);
+	color: white;
+}

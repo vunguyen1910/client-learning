@@ -285,7 +285,7 @@ export default function VideoLearning(props) {
   const render_comment = cmtRender.map(cmt => {
     return (
       <>
-        <div className="comment bg-light" key={cmt.id}>
+        <div className="comment bg-light" key={cmt.id} id={`cmt${cmt.id}`}>
           <div className="d-flex">
             <div className="author-comment text-info d-inline-flex">
               <div>

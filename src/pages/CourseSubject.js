@@ -61,7 +61,7 @@ export default function CourseSubject(props) {
             </h5>
 
             <div className="my-4 d-flex"> 
-              <img className="md-avatar rounded-circle mr-3" src={props.currentUser && props.currentUser.avata_url} alt="author avata" />
+              <img className="md-avatar rounded-circle mr-3" src={course.user_id && course.user_id.avata_url} alt="author avata" />
               <div>
                 <p className="text-card-course">Author: {course.user_id && course.user_id.name}</p>
                 <div className="text-card-course">

@@ -34,26 +34,27 @@ export default function NavBar(props) {
       props.getNotification();
     }
   };
+  console.log(props.notification," notice")
   const noticeRender = props.notification.map(notice => {
     return (
       <div key={notice.id}>
         {notice.readed === true ? (
-          <Link
+          <LinkTo
             className="dropdown-item btn btn-light"
-            to={`/video/${notice.post_id}`}
+            to={`/video/${notice.post_id}/#cmt${notice.comment_id}`}
             key = {notice.id}
           >
             {notice.body}
-          </Link>
+          </LinkTo>
         ) : (
-          <Link
+          <LinkTo
             className="dropdown-item"
             to={`/video/${notice.post_id}`}
             style={{ backgroundColor: "grey", color: "white" }}
             onClick={() => editNotice(notice.id)}
           >
             {notice.body}
-          </Link>
+          </LinkTo>
         )}
       </div>
     );
