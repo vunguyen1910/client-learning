@@ -19,6 +19,7 @@ export default function NavBar(props) {
       alert("something wrong log out again");
     }
   };
+
   const editNotice = async id => {
     const resp = await fetch(
       `${process.env.REACT_APP_URL_DATABASE}/notification/${id}`,
@@ -34,29 +35,47 @@ export default function NavBar(props) {
       props.getNotification();
     }
   };
+
+  const deleteNotice = async(id) => {
+    const resp = await fetch(`${process.env.REACT_APP_URL_DATABASE}/notification/${id}/delete`,{
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json"
+      }
+    })
+    if (resp.ok){
+      props.getNotification()
+    }
+  }
   console.log(props.notification," notice")
   const noticeRender = props.notification.map(notice => {
-    return (
-      <div key={notice.id}>
-        {notice.readed === true ? (
-          <LinkTo
-            className="dropdown-item btn btn-light"
-            to={`/video/${notice.post_id}/#cmt${notice.comment_id}`}
-            key = {notice.id}
-          >
-            {notice.body}
-          </LinkTo>
-        ) : (
-          <LinkTo
-            className="dropdown-item"
-            to={`/video/${notice.post_id}`}
-            style={{ backgroundColor: "grey", color: "white" }}
-            onClick={() => editNotice(notice.id)}
-          >
-            {notice.body}
-          </LinkTo>
-        )}
-      </div>
+    return (   
+        <div key={notice.id} className="d-flex">
+          {notice.readed === true ? (
+            <LinkTo
+              className="dropdown-item btn btn-light flex-grow-1"
+              to={`/video/${notice.post_id}/#cmt${notice.comment_id}`}
+              key = {notice.id}
+            >
+              {notice.body}
+            </LinkTo>
+          ) : (
+            <LinkTo
+              className="dropdown-item"
+              to={`/video/${notice.post_id}/#cmt${notice.comment_id}`}
+              style={{ backgroundColor: "grey", color: "white" }}
+              onClick={() => editNotice(notice.id)}
+            >
+            
+              {notice.body}
+            </LinkTo>
+          )}
+          <div className="btn align-self-end" onClick={()=>deleteNotice(notice.id)}>
+            <i className="far fa-trash-alt"></i>
+          </div>
+        </div>
+
     );
   });
 
