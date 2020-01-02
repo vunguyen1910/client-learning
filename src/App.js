@@ -15,6 +15,7 @@ import LearningCourse from "./pages/LearningCourse";
 import EditReCourse from "./pages/EditReCourse";
 import VideoLearning from "./pages/VideoLearning";
 import CourseTeacher from "./pages/CourseTeacher";
+import EditUser from "./pages/EditUser"
 
 function App(props) {
   const [currentUser, setCurrentUser] = useState(null);
@@ -130,6 +131,7 @@ function App(props) {
             />
           )}
         />
+        <Route path="/edit-user/:id" render={()=> <EditUser currentUser={currentUser}/>}/>
         <Route path="/" render={() => <HomePage {...props}/>} />
       </Switch>
     </div>

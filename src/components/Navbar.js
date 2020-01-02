@@ -48,7 +48,6 @@ export default function NavBar(props) {
       props.getNotification()
     }
   }
-  console.log(props.notification," notice")
   const noticeRender = props.notification.map(notice => {
     return (   
         <div key={notice.id} className="d-flex">
@@ -159,11 +158,6 @@ export default function NavBar(props) {
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuLink"
                   >
-                    <li className="nav-item">
-                      <div className="dropdown-item" onClick={() => logOut()}>
-                      <i className="fas fa-sign-out-alt"></i> Logout
-                      </div>
-                    </li>
                     {props.currentUser &&
                       (props.currentUser.role === "teacher" ? (
                         <>
@@ -179,6 +173,19 @@ export default function NavBar(props) {
                       ) : (
                         <></>
                       ))}
+                      <li className="nav-item">
+                      <Link
+                        to={`/edit-user/${props.currentUser && props.currentUser.id}`}
+                        className="dropdown-item"
+                      >
+                        <i className="fas fa-user-edit"></i> Edit Profile
+                      </Link>
+                    </li>
+                      <li className="nav-item">
+                      <div className="dropdown-item btn" onClick={() => logOut()}>
+                      <i className="fas fa-sign-out-alt"></i> Logout
+                      </div>
+                    </li>
                   </ul>
                 </li>
               </>
