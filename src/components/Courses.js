@@ -22,7 +22,7 @@ export default function Courses() {
               </ul>
               <div className="container d-flex justify-content-center py-4">
                 <Link className="btn btn-secondary rounded-pill btn-course" to="/course/guitar">
-                <i class="fas fa-arrow-circle-right"></i> Get Started
+                <i className="fas fa-arrow-circle-right"></i> Get Started
                 </Link>
               </div>
             </div>
@@ -44,7 +44,7 @@ export default function Courses() {
               </ul>
               <div className="container d-flex justify-content-center py-4">
                 <Link className="btn btn-secondary rounded-pill btn-course" to="/course/piano">
-                <i class="fas fa-arrow-circle-right"></i> Get Started
+                <i className="fas fa-arrow-circle-right"></i> Get Started
                 </Link>
               </div>
             </div>
@@ -67,7 +67,7 @@ export default function Courses() {
               </ul>
               <div className="container d-flex justify-content-center py-4">
                 <Link className="btn btn-secondary rounded-pill btn-course" to="/course/violin">
-                <i class="fas fa-arrow-circle-right"></i> Get Started
+                <i className="fas fa-arrow-circle-right"></i> Get Started
                 </Link>
               </div>
             </div>
