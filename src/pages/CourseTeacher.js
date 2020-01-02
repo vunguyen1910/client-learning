@@ -56,7 +56,6 @@ export default function CourseTeacher(props) {
       </div>
     );
   });
-  console.log(courseinSubject,"course in subject")
   return (
     <div className="container my-5">
       {state}

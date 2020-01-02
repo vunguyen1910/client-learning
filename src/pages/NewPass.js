@@ -10,7 +10,6 @@ export default function Forgot() {
 
     const token = accessToken
     const history = useHistory()
-console.log(input.value)
   const getNewPass = async() => {
     if(input){
         const resp = await fetch(`${process.env.REACT_APP_URL_DATABASE}/new-password`, {
@@ -27,12 +26,10 @@ console.log(input.value)
     }
     }  
   }
-console.log(token)
   const handelSubmit = e => {
     e.preventDefault();
     getNewPass()
   };
-console.log(input)
   if (token == null) history.push('/')
   return (
     <div className="container form-forgot text-center">

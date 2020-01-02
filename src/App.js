@@ -29,7 +29,6 @@ function App(props) {
     getNotification()
     const interval = setInterval(function(){
       getNotification()
-      console.log('get notice')
     }, 30000)
 
   }, []);

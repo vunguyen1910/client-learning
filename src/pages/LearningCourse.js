@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button, Card, Form} from "react-bootstrap";
 import Helmet from "react-helmet";
+import moment from 'moment'
 export default function LearningCourse(props) {
   const [reCourse, setReCourse] = useState([]);
   const [url, seturl] = useState("");
@@ -43,7 +44,6 @@ export default function LearningCourse(props) {
       setCourse(data.course)
     }
   }
-  console.log(course,"course ....")
   const getReCourse = async () => {
     const resp = await fetch(
       `${process.env.REACT_APP_URL_DATABASE}/recourse/${id}`,
@@ -62,12 +62,13 @@ export default function LearningCourse(props) {
 
   const recourseRender = reCourse.map(recourse => {
     return (
-      <Card className="mt-2" key={recourse.id}>
+      <Card className="mt-2 d-flex" key={recourse.id}>
         <Card.Body>
-          <Card.Title>{recourse.title}</Card.Title>
-          <Card.Text>{recourse.desc}</Card.Text>
+          <Card.Title> <i className="fas fa-book-open"></i> {recourse.title}</Card.Title>
+          <Card.Text> <i className="fas fa-align-left"></i> {recourse.desc}</Card.Text>
+          <div> <i className="far fa-clock mr-3"></i>{moment(recourse.date).fromNow()}</div>  
           <Link to={`/video/${recourse.id}`} className="btn btn-primary">
-            View
+          <i className="fab fa-leanpub"></i> View
           </Link>
           {props.currentUser && (props.currentUser.id === recourse.author.id ?
               <>
@@ -77,7 +78,7 @@ export default function LearningCourse(props) {
                   }}
                   className="m-3"
                 >
-                  Delete
+                  <i className="fas fa-trash-alt"></i> Delete
                 </Button>
                 <Link
                   className="btn btn-primary"
@@ -88,6 +89,7 @@ export default function LearningCourse(props) {
               </>
             : "")}
         </Card.Body>
+                   
       </Card>
     );
   });
@@ -134,10 +136,11 @@ export default function LearningCourse(props) {
     }
   };
   return (
-    <div className="container">
+    <>
       <Helmet>
         <title>{title}</title>
       </Helmet>
+    <div className="container">
       <div className="row mt-3 bg-light">
         <div className="col-md-8 pt-5">
           <div>
@@ -153,6 +156,9 @@ export default function LearningCourse(props) {
               <p>{course.user_id && course.user_id.desc}</p>
             </div>
           </div>
+            <div className="mt-4 ml-5">
+              <i class="far fa-clock mr-2"></i> {moment(course.date).fromNow()}
+            </div>
         </div>
         <div className="col-md-4">
           <img src={course.img} style={{width: "30vw"}}/>
@@ -168,7 +174,7 @@ export default function LearningCourse(props) {
           >
             <Form.Group controlId="validationCustom01">
               <Form.Label className="create-course-label">
-                Title of recourse
+              <i className="fas fa-book-reader"></i> Title of recourse
               </Form.Label>
               <Form.Control
                 required
@@ -182,7 +188,7 @@ export default function LearningCourse(props) {
             </Form.Group>
             <Form.Group controlId="validationCustom02">
               <Form.Label className="create-course-label">
-                Video URL from Youtube
+              <i className="fas fa-link"></i> Video URL from Youtube
               </Form.Label>
               <Form.Control
                 required
@@ -191,12 +197,12 @@ export default function LearningCourse(props) {
                 onChange={(e)=>seturl(e.target.value)}
               />
               <Form.Control.Feedback type="invalid">
-                You must insert your course's image
+                You must insert your course's URL
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="validationCustom04">
               <Form.Label className="create-course-label">
-                Description
+              <i className="fas fa-align-left"></i> Description
               </Form.Label>
               <Form.Control
                 as="textarea"
@@ -219,7 +225,13 @@ export default function LearningCourse(props) {
         ""
       ))}
       {state}
-      {recourseRender}
+
     </div>
+    <div className="jumbotron">
+      <div className="container">
+    {recourseRender}
+    </div>
+    </div>
+    </>
   );
 }

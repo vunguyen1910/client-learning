@@ -44,7 +44,6 @@ export default function Teacher() {
       </ButtonToolbar>
     );
   });
-  console.log(teachers);
   return (
     <section className="mt-5">
       <div className="container mb-5">

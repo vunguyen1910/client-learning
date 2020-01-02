@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Col, Row, Button, Modal, Form, Tabs, Tab } from "react-bootstrap";
 import Markdown from "react-markdown";
 import Helmet from "react-helmet";
+import moment from 'moment'
 
 export default function VideoLearning(props) {
   const [recourse, setReCourse] = useState({});
@@ -32,7 +33,7 @@ export default function VideoLearning(props) {
   useEffect(() => {
     getReCourse();
   }, []);
-
+  
   const openModal = () => {
     setIsOpen(true);
   };
@@ -83,7 +84,11 @@ export default function VideoLearning(props) {
       setCmtRender(data.data.comments);
     } else alert("cant fetch");
   };
+
+
+
   const renderDoc = docs.map(doc => {
+    const b = new Date(doc.date)
     return (
       <>
         <div
@@ -94,16 +99,19 @@ export default function VideoLearning(props) {
           }}
           key={doc.id}
         >
-          <p
+          <div
             style={{
               margin: "20px",
               cursor: "pointer",
               wordWrap: "break-word"
             }}
-            className="border border-info rounded-pill p-2"
+            className="border border-info rounded-pill p-2 d-flex align-items-center"
           >
-            {doc.title}
-          </p>
+            <div className="flex-grow-1">{doc.title}</div>
+            <div className="pl-3 border-left">
+            <i className="far fa-clock"></i> {moment(b).fromNow()}
+            </div>
+          </div>
         </div>
         {(props.currentUser && props.currentUser.id) === doc.teacher_id ? (
           <>
@@ -225,7 +233,6 @@ export default function VideoLearning(props) {
   };
   const editComment = async (e, cmt_id) => {
     e.preventDefault();
-    console.log(e.target.value, "comment")
     const resp = await fetch(
       `${process.env.REACT_APP_URL_DATABASE}/recourse/${cmt_id}/edit-comment`,
       {
@@ -241,7 +248,6 @@ export default function VideoLearning(props) {
     );
     if (resp.ok) getReCourse();
   };
-  console.log(recomment, "recomment");
 
   const post_recomment = async (e, cmt_id) => {
     e.preventDefault();
@@ -396,9 +402,9 @@ export default function VideoLearning(props) {
         </div>
         {props.currentUser &&
           (props.currentUser.role === "teacher" ? (
-            <>
+            <div className="d-flex">
               <div
-                className="btn rounded-pill p-3 m-2 text-primary"
+                className="btn rounded-pill mt-2 ml-5 text-primary"
                 data-toggle="collapse"
                 href={`#collapseRecomment${cmt.id}`}
                 role="button"
@@ -407,13 +413,11 @@ export default function VideoLearning(props) {
               >
                 <i className="fas fa-comments"></i> Answer
               </div>
-            </>
+              <div className="mt-2 btn"><i className="far fa-clock"></i> {moment(cmt.date).fromNow()}</div>              
+            </div>
           ) : (
             ""
           ))}
-        {props.currentUser &&
-          (props.currentUser.id === cmt.author.id ? (
-            <>
               <div className="collapse" id={`collapseRecomment${cmt.id}`}>
                 <form
                   className="ml-5"
@@ -434,16 +438,10 @@ export default function VideoLearning(props) {
                   </button>
                 </form>
               </div>
-            </>
-          ) : (
-            ""
-          ))}
           <hr/>
       </>
     );
   });
-
-  console.log(cmtRender, "cmt");
 
   return (
     <div className="container mt-5">
@@ -451,7 +449,7 @@ export default function VideoLearning(props) {
         <title>Watch video and read documentation</title>
       </Helmet>
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-8">
           <div style={{ height: "500px" }}>
             <iframe
               style={{
@@ -461,10 +459,10 @@ export default function VideoLearning(props) {
               src={`https://www.youtube.com/embed/${cutVideo}`}
               frameBorder="0"
               allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen="allowfullscreen"
-              mozallowfullscreen="mozallowfullscreen"
-              msallowfullscreen="msallowfullscreen"
-              oallowfullscreen="oallowfullscreen"
+              allowFullScreen="allowfullscreen"
+              allowFullScreen="mozallowfullscreen"
+              allowFullScreen="msallowfullscreen"
+              allowFullScreen="oallowfullscreen"
               webkitallowfullscreen="webkitallowfullscreen"
             />
           </div>
@@ -478,7 +476,10 @@ export default function VideoLearning(props) {
           </p>
           <hr className="mt-5" />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-4">
+
+          <h2> <i className="fas fa-book"></i> Documentation</h2>
+
           {props.currentUser &&
             (props.currentUser.role === "teacher" ? (
               <Button
@@ -491,18 +492,19 @@ export default function VideoLearning(props) {
             ) : (
               ""
             ))}
-          <h2>Document here if you want to read</h2>
+
           {renderDoc}
           <hr />
         </div>
       </div>
       <div className="row">
-        <div className="col-md-6">
-          <div className="mb-3">
-            <h2 className="title-comment mb-3">Comment</h2>
+        <div className="col-md-8">
+          <div>
+            <h2 className="title-comment mb-3"> <i className="fas fa-comment"></i> Comment</h2>
             {props.currentUser ? (
-              <>
-                <form>
+              <div className="d-flex">
+                <img src={props.currentUser && props.currentUser.avata_url} alt="avata user" className="md-avatar rounded-circle mr-3"/>
+                <form style={{width: "90%"}}>
                   <div className="form-group">
                     <input
                       type="text-aria"
@@ -518,17 +520,17 @@ export default function VideoLearning(props) {
                     className="btn login-button mb-3"
                     onClick={e => post_comment(e)}
                   >
-                    Comment
+                     <i className="fas fa-comment"></i>  Comment
                   </button>
                 </form>
-              </>
+              </div>
             ) : (
               <></>
             )}
             {render_comment}
           </div>
         </div>
-        <div className="col-md-6">{/* spacing */}</div>
+        <div className="col-md-4">{/* spacing */}</div>
       </div>
 
       <Modal

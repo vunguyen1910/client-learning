@@ -29,7 +29,6 @@ export default function Register(props) {
       }
     }
   };
-  console.log(input, "input here")
   if (props.currentUser) history.push("/");
   return (
     <section className="jumbotron bg-transparent">
