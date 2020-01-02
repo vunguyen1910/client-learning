@@ -64,7 +64,7 @@ export default function CourseSubject(props) {
               <img className="md-avatar rounded-circle mr-3" src={props.currentUser && props.currentUser.avata_url} alt="author avata" />
               <div>
                 <p className="text-card-course">Author: {course.user_id && course.user_id.name}</p>
-                <div>
+                <div className="text-card-course">
                   <i className="fas fa-clock mr-2"></i>
                   {moment(course.date).fromNow()}
                  </div>
@@ -89,17 +89,17 @@ export default function CourseSubject(props) {
                 <>
                   <Link
                     to={`/course/${course.id}/edit`}
-                    className="btn btn-primary mx-2 px-4 rounded-pill"
+                    className="btn login-button mx-2 px-4 rounded-pill"
                   >
                     {" "}
-                    <i class="far fa-edit"></i> Edit
+                    <i class="far fa-edit"></i>
                   </Link>
                   <div
-                    className="btn btn-dark rounded-pill px-4"
+                    className="btn login-button rounded-pill px-4"
                     onClick={() => deleteCourse(course.id)}
                   >
                     {" "}
-                    <i className="fas fa-trash-alt"></i> Delete
+                    <i className="fas fa-trash-alt"></i>
                   </div>
                 </>
               ) : (
