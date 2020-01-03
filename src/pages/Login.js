@@ -37,7 +37,7 @@ export default function Login(props) {
     e.preventDefault();
     login();
   };
-  if (props.currentUser) history.goBack();
+  if (props.currentUser) history.push('/');
   return (
     <section className="jumbotron bg-transparent">
       <div className="row">
