@@ -1,15 +1,20 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import { Form, Button } from "react-bootstrap";
 import {useHistory} from 'react-router-dom'
 export default function Forgot() {
-    const accessToken =
-    window.location.search.split("=")[0] === "?token"
-      ? window.location.search.split("=")[1]
-      : null;
+  const history = useHistory()
+  const [token, setToken] = useState("")
+  const accessToken = ()=>{
+    const access = window.location.search.split("=")[0] === "?token"
+    ? window.location.search.split("=")[1]
+    : null;
+    return setToken(access)
+  }
+  useEffect(() => {
+    accessToken()
+  }, [])
   const [input, setInput] = useState("");
-
-    const token = accessToken
-    const history = useHistory()
+  console.log(token)
   const getNewPass = async() => {
     if(input){
         const resp = await fetch(`${process.env.REACT_APP_URL_DATABASE}/new-password`, {
@@ -30,16 +35,13 @@ export default function Forgot() {
     e.preventDefault();
     getNewPass()
   };
-  if (token == null) history.push('/')
   return (
     <div className="container form-forgot text-center">
     <Form
-      onSubmit={e => handelSubmit(e)}
-      onChange={e => setInput(e.target.value)}
-    >
-      <Form.Group controlId="formBasicEmail">
+      onSubmit={e => handelSubmit(e)}>
+      <Form.Group>
         <Form.Label>New Password</Form.Label>
-        <Form.Control type="password" placeholder="Enter password" name="password" />
+        <Form.Control type="password" placeholder="Enter password" name="password" onChange={e => {setInput(e.target.value); e.preventDefault()}}/>
         <Form.Text className="text-muted">Input your new Password</Form.Text>
         <Button variant="primary" type="submit" className="login-button mt-5">
           Submit
