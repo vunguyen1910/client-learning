@@ -30,7 +30,7 @@ function App(props) {
     getNotification()
     const interval = setInterval(function(){
       getNotification()
-    }, 30000)
+    }, 5000)
 
   }, []);
 
